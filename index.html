@@ -61,11 +61,11 @@
     border-bottom:1px solid var(--line);
   }
   .nav{
-    max-width:1240px;margin:0 auto;padding:14px 32px;
+    max-width:1240px;margin:0 auto;padding:18px 32px;
     display:flex;align-items:center;justify-content:space-between;
   }
-  .logo{display:flex;align-items:center;gap:8px;}
-  .logo svg{height:28px;width:auto;}
+  .logo{font-family:'Anton',sans-serif;font-size:1.5rem;letter-spacing:1px;}
+  .logo span{color:var(--accent);}
   .nav-links{display:flex;gap:34px;list-style:none;}
   .nav-links a{font-size:0.92rem;font-weight:500;color:var(--ink);opacity:0.75;transition:opacity .15s;}
   .nav-links a:hover{opacity:1;}
@@ -288,13 +288,7 @@
 
   <header>
     <div class="nav">
-      <a class="logo" href="#top">
-        <!-- Professional SVG Logo -->
-        <svg viewBox="0 0 140 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <text x="0" y="27" font-family="'Anton', sans-serif" font-size="28" letter-spacing="1" fill="#111110">HIFUN</text>
-          <text x="108" y="27" font-family="'Anton', sans-serif" font-size="28" fill="#FF4B1F">3</text>
-        </svg>
-      </a>
+      <a class="logo" href="#top">HIFUN<span>3</span></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#categories">Shop</a></li>
         <li><a href="#products">New In</a></li>
