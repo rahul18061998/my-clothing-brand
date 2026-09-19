@@ -80,30 +80,35 @@
     .nav-right .btn-text { display: none; }
   }
 
-  /* ---------- Coming Soon Banner (Topmost below Header) ---------- */
-  .soon-banner {
-    background: var(--stone);
+  /* ---------- Simple Coming Soon Banner (Topmost below Header) ---------- */
+  .simple-banner {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 24px 32px;
+    text-align: center;
     border-bottom: 1px solid var(--line);
-    padding: 16px 0;
   }
-  .soon-inner {
-    display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  .simple-banner-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
   }
-  .soon-text { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-  .soon-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--ink); color: var(--paper);
-    padding: 5px 12px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.4px; border-radius: 20px;
+  .simple-banner h3 {
+    font-size: 1.6rem;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 1px;
+    color: var(--accent);
+    text-transform: uppercase;
   }
-  .soon-badge::before {
-    content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
-    animation: pulse 1.5s infinite;
+  .simple-banner p {
+    font-size: 0.95rem;
+    color: #E2DFD5;
   }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-  .soon-inner p { font-size: 0.9rem; color: var(--muted); }
-  .soon-inner p b { color: var(--ink); }
 
-  /* ---------- Hero Section (with Slider) ---------- */
+  /* ---------- Hero Section with Image Slider ---------- */
   .hero {
     display: grid; grid-template-columns: 1fr 1fr;
     min-height: 580px;
@@ -314,14 +319,11 @@
     </div>
   </header>
 
-  <!-- Coming Soon Banner (Placed at the Very Top right below Header) -->
-  <div class="soon-banner">
-    <div class="wrap soon-inner">
-      <div class="soon-text">
-        <span class="soon-badge">Coming Soon</span>
-        <p>Free shipping on all prepaid orders &nbsp;·&nbsp; Cash on delivery available <b>everywhere</b></p>
-      </div>
-      <button class="btn btn-accent" id="bannerQuickView" style="padding: 8px 18px; font-size: 0.82rem;">Explore Items</button>
+  <!-- Simple Coming Soon Banner (Placed right below Header) -->
+  <div class="simple-banner">
+    <div class="simple-banner-content">
+      <h3>Coming Soon</h3>
+      <p>Free shipping on all prepaid orders &nbsp;·&nbsp; Cash on delivery available everywhere</p>
     </div>
   </div>
 
@@ -549,9 +551,6 @@
       document.getElementById('products').scrollIntoView({behavior: 'smooth'});
     });
     document.getElementById('ctaShopBtn').addEventListener('click', () => {
-      document.getElementById('products').scrollIntoView({behavior: 'smooth'});
-    });
-    document.getElementById('bannerQuickView').addEventListener('click', () => {
       document.getElementById('products').scrollIntoView({behavior: 'smooth'});
     });
     document.getElementById('viewAllProd').addEventListener('click', () => {
