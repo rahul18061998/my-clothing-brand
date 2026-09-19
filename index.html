@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIFUN 3 - Complete Store</title>
+    <title>HIFUN 3 - Official Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -81,8 +81,34 @@
         .nav-icons {
             display: flex;
             gap: 20px;
+            align-items: center;
             font-size: 1.1rem;
             cursor: pointer;
+        }
+
+        /* Search Bar Box in Header */
+        .search-box-container {
+            display: none;
+            position: absolute;
+            top: 70px; left: 0; width: 100%;
+            background: #fff;
+            padding: 15px 30px;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .search-box-container.active {
+            display: block;
+        }
+
+        .search-box-container input {
+            width: 50%;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
         }
 
         .menu-toggle {
@@ -102,7 +128,7 @@
             display: block;
         }
 
-        /* Hero Banner (Home Page) */
+        /* Hero Banner */
         .hero {
             width: 100%;
             height: 550px;
@@ -420,6 +446,7 @@
             .product-detail-container { grid-template-columns: 1fr; gap: 30px; }
             .product-detail-img { height: 380px; }
             .cart-summary { width: 100%; float: none; }
+            .search-box-container input { width: 90%; }
         }
     </style>
 </head>
@@ -436,15 +463,19 @@
             <a class="logo" onclick="switchPage('home')">HIFUN 3</a>
             <button class="menu-toggle" id="menuToggle">&#9776;</button>
             <ul class="nav-links" id="navLinks">
-                <li><a onclick="switchPage('home')" class="active" id="link-home">Home</a></li>
-                <li><a onclick="switchPage('shop')" id="link-shop">Shop All</a></li>
-                <li><a onclick="switchPage('shop')" id="link-men">Men</a></li>
-                <li><a onclick="switchPage('shop')" id="link-women">Women</a></li>
+                <li><a onclick="switchPage('home')" class="active">Home</a></li>
+                <li><a onclick="switchPage('shop')">All Products</a></li>
+                <li><a onclick="switchPage('collections')">Collections</a></li>
             </ul>
             <div class="nav-icons">
-                <span onclick="switchPage('shop')">🔍</span>
-                <span onclick="switchPage('cart')">🛒</span>
+                <span onclick="toggleSearchBox()" title="Search Products">🔍</span>
+                <span onclick="switchPage('cart')" title="View Cart">🛒</span>
             </div>
+        </div>
+
+        <!-- Real-time Search Box Input Dropdown -->
+        <div class="search-box-container" id="searchBoxContainer">
+            <input type="text" id="searchInput" placeholder="Search for hoodies, tees, jackets..." onkeyup="filterProducts()">
         </div>
     </header>
 
@@ -475,29 +506,29 @@
 
         <div class="container">
             <h2 class="section-title">Trending Styles</h2>
-            <div class="prod-grid">
-                <div class="prod-card" onclick="openProductDetail('Classic Black Oversized Hoodie', '₹1,499', 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80')">
+            <div class="prod-grid" id="home-products">
+                <div class="prod-card" data-name="Classic Black Oversized Hoodie" onclick="openProductDetail('Classic Black Oversized Hoodie', '₹1,499', 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80')">
                     <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80');"></div>
                     <div class="prod-info">
                         <h4>Classic Black Oversized Hoodie</h4>
                         <div class="price">₹1,499</div>
                     </div>
                 </div>
-                <div class="prod-card" onclick="openProductDetail('Essential Graphic Tee', '₹799', 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80')">
+                <div class="prod-card" data-name="Essential Graphic Tee" onclick="openProductDetail('Essential Graphic Tee', '₹799', 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80')">
                     <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80');"></div>
                     <div class="prod-info">
                         <h4>Essential Graphic Tee</h4>
                         <div class="price">₹799</div>
                     </div>
                 </div>
-                <div class="prod-card" onclick="openProductDetail('Vintage Denim Jacket', '₹2,299', 'https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80')">
+                <div class="prod-card" data-name="Vintage Denim Jacket" onclick="openProductDetail('Vintage Denim Jacket', '₹2,299', 'https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80')">
                     <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80');"></div>
                     <div class="prod-info">
                         <h4>Vintage Denim Jacket</h4>
                         <div class="price">₹2,299</div>
                     </div>
                 </div>
-                <div class="prod-card" onclick="openProductDetail('Urban Streetwear Combo', '₹1,999', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80')">
+                <div class="prod-card" data-name="Urban Streetwear Combo" onclick="openProductDetail('Urban Streetwear Combo', '₹1,999', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80')">
                     <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80');"></div>
                     <div class="prod-info">
                         <h4>Urban Streetwear Combo</h4>
@@ -508,33 +539,33 @@
         </div>
     </div>
 
-    <!-- ================= 2. SHOP CATALOGUE PAGE VIEW ================= -->
+    <!-- ================= 2. ALL PRODUCTS / SHOP PAGE VIEW ================= -->
     <div id="page-shop" class="page-section">
         <div class="container">
-            <h2 class="section-title">All Products Collection</h2>
-            <div class="prod-grid">
-                <div class="prod-card" onclick="openProductDetail('Classic Black Oversized Hoodie', '₹1,499', 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80')">
+            <h2 class="section-title">All Products Catalogue</h2>
+            <div class="prod-grid" id="shop-products">
+                <div class="prod-card" data-name="Classic Black Oversized Hoodie" onclick="openProductDetail('Classic Black Oversized Hoodie', '₹1,499', 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80')">
                     <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80');"></div>
                     <div class="prod-info">
                         <h4>Classic Black Oversized Hoodie</h4>
                         <div class="price">₹1,499</div>
                     </div>
                 </div>
-                <div class="prod-card" onclick="openProductDetail('Essential Graphic Tee', '₹799', 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80')">
+                <div class="prod-card" data-name="Essential Graphic Tee" onclick="openProductDetail('Essential Graphic Tee', '₹799', 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80')">
                     <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80');"></div>
                     <div class="prod-info">
                         <h4>Essential Graphic Tee</h4>
                         <div class="price">₹799</div>
                     </div>
                 </div>
-                <div class="prod-card" onclick="openProductDetail('Vintage Denim Jacket', '₹2,299', 'https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80')">
+                <div class="prod-card" data-name="Vintage Denim Jacket" onclick="openProductDetail('Vintage Denim Jacket', '₹2,299', 'https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80')">
                     <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80');"></div>
                     <div class="prod-info">
                         <h4>Vintage Denim Jacket</h4>
                         <div class="price">₹2,299</div>
                     </div>
                 </div>
-                <div class="prod-card" onclick="openProductDetail('Urban Streetwear Combo', '₹1,999', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80')">
+                <div class="prod-card" data-name="Urban Streetwear Combo" onclick="openProductDetail('Urban Streetwear Combo', '₹1,999', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80')">
                     <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80');"></div>
                     <div class="prod-info">
                         <h4>Urban Streetwear Combo</h4>
@@ -545,23 +576,41 @@
         </div>
     </div>
 
-    <!-- ================= 3. PRODUCT DETAIL PAGE VIEW ================= -->
+    <!-- ================= 3. COLLECTIONS PAGE VIEW ================= -->
+    <div id="page-collections" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Explore Collections</h2>
+            <div class="cat-grid">
+                <div class="cat-card" style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80');" onclick="switchPage('shop')">
+                    <h3>Oversized Hoodies</h3>
+                </div>
+                <div class="cat-card" style="background-image: url('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80');" onclick="switchPage('shop')">
+                    <h3>Streetwear Tees</h3>
+                </div>
+                <div class="cat-card" style="background-image: url('https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80');" onclick="switchPage('shop')">
+                    <h3>Jackets & Denims</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= 4. PRODUCT DETAIL VIEW ================= -->
     <div id="page-detail" class="page-section">
         <div class="container">
             <button class="btn" style="margin-bottom: 30px;" onclick="switchPage('shop')">&larr; Back to Shop</button>
             <div class="product-detail-container">
-                <div class="product-detail-img" id="detail-img" style="background-image: url('https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80');"></div>
+                <div class="product-detail-img" id="detail-img" style="background-image: url('');"></div>
                 <div class="product-detail-info">
-                    <h2 id="detail-title">Classic Black Oversized Hoodie</h2>
-                    <span class="price" id="detail-price">₹1,499</span>
-                    <p>Crafted with premium heavy-gauge cotton fabric to provide superior breathability, extreme comfort, and a lasting trendy streetwear look. Perfect for your casual outings.</p>
+                    <h2 id="detail-title">Product Name</h2>
+                    <span class="price" id="detail-price">₹0.00</span>
+                    <p>Crafted with premium heavy-gauge fabric to provide superior breathability, extreme comfort, and a lasting trendy look. Perfect for your everyday wear.</p>
                     <button class="btn" onclick="switchPage('cart')">Add To Cart</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ================= 4. CART & CHECKOUT PAGE VIEW ================= -->
+    <!-- ================= 5. CART & CHECKOUT PAGE VIEW ================= -->
     <div id="page-cart" class="page-section">
         <div class="container">
             <h2 class="section-title">Shopping Cart</h2>
@@ -604,8 +653,8 @@
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a onclick="switchPage('home')">Home</a></li>
-                    <li><a onclick="switchPage('shop')">Shop Catalog</a></li>
-                    <li><a onclick="switchPage('shop')">Collections</a></li>
+                    <li><a onclick="switchPage('shop')">All Products</a></li>
+                    <li><a onclick="switchPage('collections')">Collections</a></li>
                     <li><a onclick="switchPage('cart')">View Cart</a></li>
                 </ul>
             </div>
@@ -629,7 +678,7 @@
         </div>
     </footer>
 
-    <!-- Script for Multi-Page Navigation & Dynamic Views -->
+    <!-- Script for Navigation, Search, and Dynamic Pages -->
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
@@ -639,18 +688,38 @@
         });
 
         function switchPage(pageId) {
-            // Hide all pages
             const pages = document.querySelectorAll('.page-section');
             pages.forEach(page => page.classList.remove('active-page'));
 
-            // Show selected page
             document.getElementById('page-' + pageId).classList.add('active-page');
-
-            // Scroll to top smoothly
             window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // Close mobile menu if open
             navLinks.classList.remove('active');
+            
+            // Hide search box when switching page
+            document.getElementById('searchBoxContainer').classList.remove('active');
+        }
+
+        function toggleSearchBox() {
+            const searchBox = document.getElementById('searchBoxContainer');
+            searchBox.classList.toggle('active');
+            if(searchBox.classList.contains('active')) {
+                document.getElementById('searchInput').focus();
+            }
+        }
+
+        // Real-time Search Filter Logic
+        function filterProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.prod-card');
+
+            cards.forEach(card => {
+                let name = card.getAttribute('data-name').toLowerCase();
+                if(name.includes(input)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
         }
 
         function openProductDetail(title, price, imgUrl) {
