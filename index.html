@@ -9,49 +9,49 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
         }
 
         body {
-            background-color: #fff;
-            color: #222;
+            background-color: #ffffff;
+            color: #1a1a1a;
             overflow-x: hidden;
         }
 
         /* Top Announcement Bar */
-        .top-bar {
-            background: #111;
-            color: #fff;
+        .announcement-bar {
+            background-color: #000000;
+            color: #ffffff;
             text-align: center;
             font-size: 0.8rem;
-            padding: 8px 10px;
-            letter-spacing: 1px;
+            padding: 10px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
-        /* Main Header */
+        /* Main Sticky Header */
         header {
             background: #ffffff;
-            border-bottom: 1px solid #eaeaea;
+            border-bottom: 1px solid #e5e5e5;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
         .header-container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 15px 30px;
+            padding: 18px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
+            font-size: 2rem;
+            font-weight: 800;
             letter-spacing: 3px;
-            color: #000;
+            color: #000000;
             text-decoration: none;
         }
 
@@ -62,16 +62,24 @@
 
         nav a {
             text-decoration: none;
-            color: #333;
-            margin-left: 30px;
+            color: #333333;
+            margin-left: 35px;
             font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             transition: color 0.3s;
         }
 
         nav a:hover {
-            color: #b8860b; /* Premium royal accent */
+            color: #d4af37;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
         }
 
         .hamburger {
@@ -80,33 +88,32 @@
             font-size: 1.8rem;
             background: none;
             border: none;
-            color: #111;
         }
 
-        /* Hero Banner Slider */
-        .slider-container {
+        /* Hero Slider Banner */
+        .hero-slider {
             width: 100%;
-            height: 550px;
-            overflow: hidden;
+            height: 600px;
             position: relative;
-            background: #f4f4f4;
+            overflow: hidden;
+            background: #111;
         }
 
         .slide {
             width: 100%;
             height: 100%;
             position: absolute;
+            top: 0;
+            left: 0;
             opacity: 0;
             transition: opacity 1s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #fff;
-            padding: 0 20px;
             background-size: cover;
             background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #ffffff;
         }
 
         .slide.active {
@@ -117,241 +124,246 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.35);
-            z-index: 1;
+            background: rgba(0, 0, 0, 0.4);
         }
 
         .slide-content {
             position: relative;
             z-index: 2;
-            animation: fadeInUp 1s ease-out;
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeInText 1s ease-out;
         }
 
-        .slide h1 {
-            font-size: 3.2rem;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
+        .slide-content h1 {
+            font-size: 3.5rem;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
             text-transform: uppercase;
-            font-weight: 300;
+            font-weight: 700;
         }
 
-        .slide p {
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            max-width: 600px;
+        .slide-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
             letter-spacing: 1px;
         }
 
-        .btn {
-            background: #fff;
-            color: #000;
-            padding: 12px 35px;
-            border: none;
-            font-size: 0.9rem;
-            font-weight: bold;
-            cursor: pointer;
+        .shop-btn {
+            background: #ffffff;
+            color: #000000;
+            padding: 14px 35px;
             text-decoration: none;
+            font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: background 0.3s, color 0.3s;
+            letter-spacing: 2px;
+            border-radius: 2px;
+            transition: all 0.3s;
             display: inline-block;
         }
 
-        .btn:hover {
-            background: #000;
-            color: #fff;
+        .shop-btn:hover {
+            background: #000000;
+            color: #ffffff;
         }
 
-        /* Container Sections */
+        /* Section Layouts */
         .container {
-            max-width: 1250px;
-            margin: 60px auto;
-            padding: 0 20px;
+            max-width: 1300px;
+            margin: 80px auto;
+            padding: 0 30px;
         }
 
-        .section-title {
+        .section-header {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 400;
-            color: #111;
+            margin-bottom: 50px;
         }
 
-        /* Categories Section (Grid Style) */
+        .section-header h2 {
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Categories Grid */
         .category-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .category-card {
-            background: #eaeaea;
-            height: 380px;
-            border-radius: 4px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 30px;
-            color: white;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
+            height: 450px;
             background-size: cover;
             background-position: center;
-            transition: transform 0.3s;
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.4s;
         }
 
         .category-card::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-            z-index: 1;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 60%);
         }
 
-        .category-card span {
+        .category-card h3 {
             position: relative;
             z-index: 2;
-            font-size: 1.4rem;
-            font-weight: 500;
+            font-size: 1.6rem;
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .category-card:hover {
-            transform: scale(1.02);
+            transform: translateY(-8px);
         }
 
-        /* Products Grid */
+        /* Product Showcase Grid */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
-        .product-card {
+        .product-item {
             background: #fff;
-            border-radius: 4px;
+            border-radius: 6px;
             overflow: hidden;
             transition: box-shadow 0.3s;
         }
 
-        .product-card:hover {
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        .product-item:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .product-image {
-            height: 350px;
-            background: #f1f1f1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #777;
-            font-size: 0.95rem;
-            font-weight: 500;
+        .product-img {
+            height: 380px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f0f0f0;
         }
 
-        .product-info {
-            padding: 20px 10px;
-            text-align: left;
+        .product-details {
+            padding: 20px 15px;
         }
 
-        .product-info h3 {
-            font-size: 1rem;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 400;
-        }
-
-        .product-info .price {
-            color: #111;
+        .product-details h4 {
             font-size: 1.05rem;
-            font-weight: bold;
-            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .product-details .price {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #000;
         }
 
         /* Professional Footer */
         footer {
-            background: #111;
-            color: #bbb;
-            padding: 60px 20px 20px;
-            margin-top: 80px;
+            background-color: #111111;
+            color: #ffffff;
+            padding: 80px 40px 30px;
+            margin-top: 100px;
         }
 
-        .footer-content {
-            max-width: 1250px;
+        .footer-grid {
+            max-width: 1300px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
         }
 
-        .footer-col h3 {
-            color: white;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+        .footer-col h4 {
+            font-size: 1.1rem;
             text-transform: uppercase;
-        }
-
-        .footer-col p, .footer-col a {
-            color: #aaa;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-
-        .footer-col a:hover {
+            letter-spacing: 1.5px;
+            margin-bottom: 25px;
             color: #fff;
         }
 
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+        }
+
         .footer-bottom {
-            text-align: center;
-            border-top: 1px solid #222;
-            padding-top: 25px;
+            max-width: 1300px;
+            margin: 0 auto;
+            border-top: 1px solid #222222;
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #777777;
             font-size: 0.85rem;
-            color: #777;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive Mobile Styles */
-        @media (max-width: 768px) {
+        /* Responsive */
+        @media(max-width: 768px) {
             .hamburger { display: block; }
             nav {
                 position: absolute;
-                top: 70px; left: 0; width: 100%;
+                top: 75px; left: 0; width: 100%;
                 background: #ffffff;
                 flex-direction: column;
                 align-items: center;
                 max-height: 0; overflow: hidden;
-                transition: max-height 0.3s ease-in-out;
-                border-bottom: 1px solid #eaeaea;
+                transition: max-height 0.4s ease;
+                border-bottom: 1px solid #ddd;
             }
-            nav.active { max-height: 250px; padding: 15px 0; }
-            nav a { margin: 12px 0; font-size: 1rem; }
-            .slide h1 { font-size: 2.2rem; }
-            .slide p { font-size: 1rem; }
+            nav.active { max-height: 300px; padding: 20px 0; }
+            nav a { margin: 15px 0; }
+            .slide-content h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Announcement Bar -->
-    <div class="top-bar">
-        Free Shipping on All Orders Above ₹999 | Use Code: HIFUN3
+    <!-- Top Bar -->
+    <div class="announcement-bar">
+        Free Shipping Across India On All Prepaid Orders | Use Code: HIFUN3
     </div>
 
-    <!-- Main Header -->
+    <!-- Header -->
     <header>
         <div class="header-container">
             <a href="#" class="logo">HIFUN 3</a>
@@ -359,122 +371,130 @@
             <nav id="nav-menu">
                 <a href="#">Men</a>
                 <a href="#">Women</a>
-                <a href="#categories">Collections</a>
-                <a href="#shop">New Arrivals</a>
+                <a href="#collections">Collections</a>
+                <a href="#arrival">New Arrivals</a>
                 <a href="#contact">Contact</a>
             </nav>
+            <div class="header-icons">
+                <span>🔍</span>
+                <span>🛒</span>
+            </div>
         </div>
     </header>
 
-    <!-- Banner Slider Section -->
-    <div class="slider-container">
-        <!-- Slide 1 -->
-        <div class="slide active" style="background: linear-gradient(135deg, #2c3e50, #1a252f);">
+    <!-- Hero Banner Slider -->
+    <div class="hero-slider">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1600&q=80');">
             <div class="slide-content">
                 <h1>Wear Your Joy</h1>
-                <p>Explore the refined blend of comfort and contemporary streetwear.</p>
-                <a href="#shop" class="btn">Shop Collection</a>
+                <p>Redefining contemporary fashion with unmatched quality and comfort.</p>
+                <a href="#arrival" class="shop-btn">Explore Now</a>
             </div>
         </div>
-        <!-- Slide 2 -->
-        <div class="slide" style="background: linear-gradient(135deg, #3d3d3d, #1f1f1f);">
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1600&q=80');">
             <div class="slide-content">
-                <span style="letter-spacing: 3px; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px; display: block;">Coming Soon</span>
-                <h1>The Monochromatic Edit</h1>
-                <p>Minimalist styles designed for your everyday sophisticated look.</p>
-                <a href="#shop" class="btn">Discover More</a>
+                <h1>Coming Soon: Winter Edit</h1>
+                <p>Crafted to elevate your statement style for the upcoming season.</p>
+                <a href="#arrival" class="shop-btn">Discover More</a>
             </div>
         </div>
     </div>
 
-    <!-- Shop By Categories -->
-    <div class="container" id="categories">
-        <h2 class="section-title">Shop By Categories</h2>
+    <!-- Collections Section -->
+    <div class="container" id="collections">
+        <div class="section-header">
+            <h2>Shop By Category</h2>
+            <p>Explore our signature style curation</p>
+        </div>
         <div class="category-grid">
-            <div class="category-card" style="background-color: #333;">
-                <span>Oversized Hoodies</span>
-            </div>
-            <div class="category-card" style="background-color: #444;">
-                <span>Streetwear Tees</span>
-            </div>
-            <div class="category-card" style="background-color: #222;">
-                <span>Denim & Jackets</span>
-            </div>
+            <a href="#" class="category-card" style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80');">
+                <h3>Oversized Hoodies</h3>
+            </a>
+            <a href="#" class="category-card" style="background-image: url('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80');">
+                <h3>Streetwear Tees</h3>
+            </a>
+            <a href="#" class="category-card" style="background-image: url('https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80');">
+                <h3>Jackets & Denims</h3>
+            </a>
         </div>
     </div>
 
-    <!-- Featured Products Section -->
-    <div class="container" id="shop">
-        <h2 class="section-title">Trending Styles</h2>
+    <!-- New Arrivals / Products Section -->
+    <div class="container" id="arrival">
+        <div class="section-header">
+            <h2>New Arrivals</h2>
+            <p>Fresh drops straight from our studio</p>
+        </div>
         <div class="product-grid">
-            <!-- Product 1 -->
-            <div class="product-card">
-                <div class="product-image">Product Image 1</div>
-                <div class="product-info">
-                    <h3>Classic Oversized Hoodie</h3>
-                    <span class="price">₹1,499</span>
+            <div class="product-item">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80');"></div>
+                <div class="product-details">
+                    <h4>Classic Black Oversized Hoodie</h4>
+                    <div class="price">₹1,499</div>
                 </div>
             </div>
-            <!-- Product 2 -->
-            <div class="product-card">
-                <div class="product-image">Product Image 2</div>
-                <div class="product-info">
-                    <h3>Casual Streetwear Tee</h3>
-                    <span class="price">₹799</span>
+            <div class="product-item">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80');"></div>
+                <div class="product-details">
+                    <h4>Essential Graphic Tee</h4>
+                    <div class="price">₹799</div>
                 </div>
             </div>
-            <!-- Product 3 -->
-            <div class="product-card">
-                <div class="product-image">Product Image 3</div>
-                <div class="product-info">
-                    <h3>Denim Cargo Jacket</h3>
-                    <span class="price">₹2,299</span>
+            <div class="product-item">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80');"></div>
+                <div class="product-details">
+                    <h4>Vintage Denim Jacket</h4>
+                    <div class="price">₹2,299</div>
                 </div>
             </div>
-            <!-- Product 4 -->
-            <div class="product-card">
-                <div class="product-image">Product Image 4</div>
-                <div class="product-info">
-                    <h3>Essential Cotton Joggers</h3>
-                    <span class="price">₹1,199</span>
+            <div class="product-item">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80');"></div>
+                <div class="product-details">
+                    <h4>Urban Streetwear Combo</h4>
+                    <div class="price">₹1,999</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Professional Footer -->
+    <!-- Footer -->
     <footer id="contact">
-        <div class="footer-content">
+        <div class="footer-grid">
             <div class="footer-col">
-                <h3>HIFUN 3</h3>
-                <p>Wear Your Joy - Bringing premium craftsmanship and modern aesthetic clothing to your doorstep.</p>
+                <h4>HIFUN 3</h4>
+                <p style="color: #aaa; font-size: 0.9rem; line-height: 1.6;">Wear Your Joy - Bringing exceptional craftsmanship and refined clothing lines directly to modern wardrobes.</p>
             </div>
             <div class="footer-col">
-                <h3>Online Shopping</h3>
-                <a href="#">Men</a>
-                <a href="#">Women</a>
-                <a href="#categories">Collections</a>
-                <a href="#shop">New Arrivals</a>
+                <h4>Online Shopping</h4>
+                <ul>
+                    <li><a href="#">Men's Wear</a></li>
+                    <li><a href="#">Women's Wear</a></li>
+                    <li><a href="#collections">Collections</a></li>
+                    <li><a href="#arrival">New Arrivals</a></li>
+                </ul>
             </div>
             <div class="footer-col">
-                <h3>Customer Policies</h3>
-                <a href="#">Shipping Information</a>
-                <a href="#">Returns & Exchanges</a>
-                <a href="#">Terms & Conditions</a>
-                <a href="#">Privacy Policy</a>
+                <h4>Customer Policies</h4>
+                <ul>
+                    <li><a href="#">Shipping & Delivery</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
             </div>
             <div class="footer-col">
-                <h3>Connect With Us</h3>
-                <p>Email: support@hifun3.com</p>
-                <p>Mon - Sat: 10:00 AM - 7:00 PM</p>
+                <h4>Contact Info</h4>
+                <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 10px;">Email: support@hifun3.com</p>
+                <p style="color: #aaa; font-size: 0.9rem;">Mon - Sat: 10:00 AM - 7:00 PM</p>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 HIFUN 3. All Rights Reserved.</p>
+            <p>Designed for Ultimate Style</p>
         </div>
     </footer>
 
-    <!-- JavaScript for Slider & Mobile Menu -->
+    <!-- JavaScript -->
     <script>
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('nav-menu');
@@ -492,7 +512,7 @@
             slides[currentSlide].classList.add('active');
         }
 
-        setInterval(nextSlide, 4500);
+        setInterval(nextSlide, 5000);
     </script>
 
 </body>
