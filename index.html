@@ -15,12 +15,13 @@
         body {
             background-color: #f9f9f9;
             color: #333;
+            overflow-x: hidden;
         }
 
         /* Header / Navbar */
         header {
             background: #ffffff;
-            padding: 20px 40px;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -37,6 +38,11 @@
             color: #111;
         }
 
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
         nav a {
             text-decoration: none;
             color: #555;
@@ -49,10 +55,20 @@
             color: #ff0055;
         }
 
+        /* Hamburger Menu Icon */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: #111;
+        }
+
         /* Banner Slider Section */
         .slider-container {
             width: 100%;
-            height: 450px;
+            height: 500px;
             overflow: hidden;
             position: relative;
             background: #000;
@@ -83,7 +99,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.45);
             z-index: 1;
         }
 
@@ -117,22 +133,49 @@
             cursor: pointer;
             text-decoration: none;
             transition: background 0.3s;
+            display: inline-block;
         }
 
         .btn:hover {
             background: #e0004c;
         }
 
+        /* Video Section */
+        .video-section {
+            padding: 60px 20px;
+            background: #111;
+            color: white;
+            text-align: center;
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 30px auto 0;
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
         /* Products Section */
         .container {
             max-width: 1200px;
-            margin: 50px auto;
+            margin: 60px auto;
             padding: 0 20px;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 40px;
             letter-spacing: 1px;
             color: #111;
@@ -164,6 +207,7 @@
             justify-content: center;
             color: #777;
             font-size: 1.1rem;
+            font-weight: 500;
         }
 
         .product-info {
@@ -190,8 +234,51 @@
             background: #111;
             color: #aaa;
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
             margin-top: 60px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Styles (Media Queries) */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            nav {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #ffffff;
+                flex-direction: column;
+                align-items: center;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+            }
+
+            nav.active {
+                max-height: 250px;
+                padding: 15px 0;
+            }
+
+            nav a {
+                margin: 10px 0;
+                font-size: 1.1rem;
+            }
+
+            .slide h1 {
+                font-size: 2.2rem;
+            }
+
+            .slide p {
+                font-size: 1rem;
+            }
         }
 
         @keyframes fadeInUp {
@@ -208,39 +295,50 @@
 </head>
 <body>
 
-    <!-- Header / Navbar -->
+    <!-- Header & Responsive Navbar -->
     <header>
         <div class="logo">HIFUN 3</div>
-        <nav>
+        <button class="hamburger" id="hamburger">&#9776;</button>
+        <nav id="nav-menu">
             <a href="#">Home</a>
-            <a href="#">Shop</a>
-            <a href="#">Collection</a>
-            <a href="#">Contact</a>
+            <a href="#shop">Shop</a>
+            <a href="#collection">Collection</a>
+            <a href="#contact">Contact</a>
         </nav>
     </header>
 
-    <!-- Banner Slider -->
+    <!-- Banner Slider Section -->
     <div class="slider-container">
         <!-- Slide 1 -->
         <div class="slide active" style="background: linear-gradient(135deg, #2c3e50, #3498db);">
             <div class="slide-content">
                 <h1>Wear Your Joy</h1>
-                <p>Discover the latest trend in street style and comfort fashion.</p>
-                <a href="#" class="btn">Explore Collection</a>
+                <p>Discover the latest trend in street style and premium comfort fashion.</p>
+                <a href="#shop" class="btn">Explore Collection</a>
             </div>
         </div>
         <!-- Slide 2 -->
         <div class="slide" style="background: linear-gradient(135deg, #8e44ad, #c0392b);">
             <div class="slide-content">
                 <h1>New Arrival Drop</h1>
-                <p>Fresh styles crafted to elevate your everyday wardrobe.</p>
-                <a href="#" class="btn">Shop Now</a>
+                <p>Fresh styles crafted to elevate your everyday wardrobe game.</p>
+                <a href="#shop" class="btn">Shop Now</a>
             </div>
         </div>
     </div>
 
+    <!-- Video Section -->
+    <div class="video-section">
+        <h2 style="letter-spacing: 1px;">Watch Our Brand Film</h2>
+        <p style="color: #aaa; margin-top: 5px;">Experience the vibe of HIFUN 3</p>
+        <div class="video-container">
+            <!-- Aap yahan YouTube ya koi bhi video ka embed link daal sakte hain -->
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Brand Video" allowfullscreen></iframe>
+        </div>
+    </div>
+
     <!-- Featured Products Section -->
-    <div class="container">
+    <div class="container" id="shop">
         <h2 class="section-title">Featured Products</h2>
         <div class="product-grid">
             <!-- Product 1 -->
@@ -274,12 +372,23 @@
     </div>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 HIFUN 3. All Rights Reserved.</p>
+    <footer id="contact">
+        <p><strong>HIFUN 3</strong> - Wear Your Joy</p>
+        <p style="font-size: 0.9rem; color: #777;">For support or inquiries, contact us via email.</p>
+        <p style="margin-top: 20px; font-size: 0.85rem;">&copy; 2026 HIFUN 3. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript for Auto Banner Slider -->
+    <!-- JavaScript for Slider & Hamburger Menu -->
     <script>
+        // Hamburger Menu Toggle for Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Auto Banner Slider Logic
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
 
@@ -289,7 +398,7 @@
             slides[currentSlide].classList.add('active');
         }
 
-        setInterval(nextSlide, 4000); // Har 4 second mein banner change hoga
+        setInterval(nextSlide, 4500); // Har 4.5 seconds mein banner slide hoga
     </script>
 
 </body>
