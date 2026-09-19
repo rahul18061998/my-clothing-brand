@@ -250,8 +250,28 @@
     .cat-card { height: 320px; }
   }
 
+  /* ---------- Founders / Team Section ---------- */
+  .founders-section { background: var(--stone); padding: 90px 0; }
+  .founders-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+  .founder-card {
+    background: var(--paper); border-radius: 8px; overflow: hidden; border: 1px solid var(--line);
+    transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column;
+  }
+  .founder-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
+  .founder-img { aspect-ratio: 4/5; overflow: hidden; background: var(--stone); }
+  .founder-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+  .founder-card:hover .founder-img img { transform: scale(1.05); }
+  .founder-info { padding: 24px; text-align: left; }
+  .founder-info h3 { font-size: 1.25rem; font-family: 'Anton', sans-serif; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .founder-info .role { font-size: 0.82rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; display: block; }
+  .founder-info p { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+
+  @media (max-width: 880px) {
+    .founders-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+  }
+
   /* ---------- Story / Trust Section ---------- */
-  .story { background: var(--stone); }
+  .story { background: var(--paper); }
   .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
   .story-img { aspect-ratio: 4/5; overflow: hidden; border-radius: 6px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
   .story-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
@@ -260,7 +280,7 @@
   .story-text p { color: var(--muted); line-height: 1.7; font-size: 1.02rem; margin-bottom: 30px; }
   
   .trust-features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .trust-box { background: var(--paper); padding: 24px; border-radius: 6px; border: 1px solid var(--line); transition: transform 0.25s, box-shadow 0.25s; }
+  .trust-box { background: var(--stone); padding: 24px; border-radius: 6px; border: 1px solid var(--line); transition: transform 0.25s, box-shadow 0.25s; }
   .trust-box:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
   .trust-box svg { width: 24px; height: 24px; stroke: var(--accent); margin-bottom: 12px; }
   .trust-box h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
@@ -330,6 +350,7 @@
         <li><a class="nav-scroll" data-target="categories">Shop</a></li>
         <li><a class="nav-scroll" data-target="products">New In</a></li>
         <li><a class="nav-scroll" data-target="story">About</a></li>
+        <li><a class="nav-scroll" data-target="founders">Founders</a></li>
         <li><a class="nav-scroll" data-target="footer">Contact</a></li>
       </ul>
 
@@ -418,6 +439,55 @@
       <button class="slider-arrow prev" id="sliderPrev" aria-label="Previous slide">&#8249;</button>
       <button class="slider-arrow next" id="sliderNext" aria-label="Next slide">&#8250;</button>
       <div class="slider-dots" id="sliderDots"></div>
+    </div>
+  </section>
+
+  <!-- Meet the Founders Section (With 3 Partner Photos & Details) -->
+  <section class="founders-section" id="founders">
+    <div class="wrap">
+      <div class="section-head" style="margin-bottom: 20px;">
+        <h2 class="display">Meet the Founders</h2>
+        <p style="color: var(--muted); max-width: 500px;">The passionate minds behind HIFUN 3, bringing you exceptional streetwear and everyday comfort.</p>
+      </div>
+      <div class="founders-grid">
+        
+        <!-- Partner 1: Rahul Gupta (White Shirt) -->
+        <div class="founder-card">
+          <div class="founder-img">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Rahul Gupta">
+          </div>
+          <div class="founder-info">
+            <h3>Rahul Gupta</h3>
+            <span class="role">Co-Founder & Operations Lead</span>
+            <p>Handling core business operations and strategic supply chain execution to ensure top-tier product quality.</p>
+          </div>
+        </div>
+
+        <!-- Partner 2: Ashish Sharma (Chashma) -->
+        <div class="founder-card">
+          <div class="founder-img">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Ashish Sharma">
+          </div>
+          <div class="founder-info">
+            <h3>Ashish Sharma</h3>
+            <span class="role">Co-Founder & Brand Strategy Lead</span>
+            <p>Driving creative direction and market growth strategies to connect bold streetwear styles with our community.</p>
+          </div>
+        </div>
+
+        <!-- Partner 3: Aman Agarwal (Jacket) -->
+        <div class="founder-card">
+          <div class="founder-img">
+            <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=600&q=80" alt="Aman Agarwal">
+          </div>
+          <div class="founder-info">
+            <h3>Aman Agarwal</h3>
+            <span class="role">Co-Founder & Technical Lead</span>
+            <p>Managing digital architecture, seamless e-commerce performance, and innovative customer experiences.</p>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -542,6 +612,7 @@
         <div>
           <h4>Company</h4>
           <ul>
+            <li><a class="nav-scroll" data-target="founders">Founders</a></li>
             <li><a class="nav-scroll" data-target="story">About us</a></li>
             <li><a class="nav-scroll" data-target="footer">Contact</a></li>
             <li><a class="policy-trigger" data-title="Shipping Policy">Shipping Policy</a></li>
@@ -622,7 +693,7 @@
     });
 
     document.querySelectorAll('.policy-trigger').forEach(item => {
-      item.addEventListener('click', () => {
+      item.append('click', () => {
         alert(item.getAttribute('data-title') + ': 7-day hassle free return and fast shipping.');
       });
     });
