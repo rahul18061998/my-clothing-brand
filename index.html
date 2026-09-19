@@ -40,7 +40,7 @@
         }
 
         .nav-container {
-            max-width: 1300px;
+            max-width: 1350px;
             margin: 0 auto;
             padding: 15px 30px;
             display: flex;
@@ -60,15 +60,16 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 20px;
+            align-items: center;
         }
 
         .nav-links li a {
             text-decoration: none;
             color: #333;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
             cursor: pointer;
             transition: color 0.3s;
@@ -86,29 +87,48 @@
             cursor: pointer;
         }
 
-        /* Search Bar Box in Header */
-        .search-box-container {
+        /* Real Search Overlay Bar */
+        .search-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
             display: none;
-            position: absolute;
-            top: 70px; left: 0; width: 100%;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 100px;
+        }
+
+        .search-overlay.active {
+            display: flex;
+        }
+
+        .search-box-wrap {
             background: #fff;
-            padding: 15px 30px;
-            border-bottom: 1px solid #eee;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 8px;
+            position: relative;
             text-align: center;
         }
 
-        .search-box-container.active {
-            display: block;
-        }
-
-        .search-box-container input {
-            width: 50%;
-            padding: 10px 15px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
+        .search-box-wrap input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            border: 2px solid #333;
             border-radius: 4px;
             outline: none;
+        }
+
+        .close-search {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
 
         .menu-toggle {
@@ -119,7 +139,7 @@
             cursor: pointer;
         }
 
-        /* Page Views Control */
+        /* Page Views Control (10 Pages) */
         .page-section {
             display: none;
         }
@@ -286,7 +306,7 @@
             color: #000;
         }
 
-        /* Product Detail Page Styling */
+        /* Product Detail View */
         .product-detail-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -324,7 +344,7 @@
             font-size: 0.95rem;
         }
 
-        /* Cart Page Styling */
+        /* Cart & Checkout Styling */
         .cart-table {
             width: 100%;
             border-collapse: collapse;
@@ -371,6 +391,21 @@
             padding-top: 15px;
         }
 
+        /* Static Page Contents (About, Contact, Policies) */
+        .static-page-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            color: #444;
+            font-size: 1rem;
+        }
+
+        .static-page-content h3 {
+            margin-top: 25px;
+            margin-bottom: 10px;
+            color: #111;
+        }
+
         /* Footer */
         footer {
             background: #111;
@@ -384,8 +419,8 @@
             max-width: 1250px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
             margin-bottom: 50px;
         }
 
@@ -427,8 +462,8 @@
             color: #666;
         }
 
-        /* Responsive Mobile Styling */
-        @media (max-width: 768px) {
+        /* Mobile Responsive */
+        @media (max-width: 992px) {
             .menu-toggle { display: block; }
             .nav-links {
                 position: absolute;
@@ -441,12 +476,11 @@
                 transition: max-height 0.3s ease;
                 border-bottom: 1px solid #eee;
             }
-            .nav-links.active { max-height: 250px; padding: 20px 0; }
+            .nav-links.active { max-height: 450px; padding: 20px 0; }
             .hero-content h1 { font-size: 2.1rem; }
             .product-detail-container { grid-template-columns: 1fr; gap: 30px; }
             .product-detail-img { height: 380px; }
             .cart-summary { width: 100%; float: none; }
-            .search-box-container input { width: 90%; }
         }
     </style>
 </head>
@@ -457,29 +491,38 @@
         Free Shipping on all prepaid orders | Use Code: HIFUN3
     </div>
 
-    <!-- Sticky Header -->
+    <!-- Sticky Header with 10 Page Navigation -->
     <header>
         <div class="nav-container">
             <a class="logo" onclick="switchPage('home')">HIFUN 3</a>
             <button class="menu-toggle" id="menuToggle">&#9776;</button>
             <ul class="nav-links" id="navLinks">
-                <li><a onclick="switchPage('home')" class="active">Home</a></li>
-                <li><a onclick="switchPage('shop')">All Products</a></li>
+                <li><a onclick="switchPage('home')">Home</a></li>
+                <li><a onclick="switchPage('shop')">Shop All</a></li>
                 <li><a onclick="switchPage('collections')">Collections</a></li>
+                <li><a onclick="switchPage('men')">Men</a></li>
+                <li><a onclick="switchPage('women')">Women</a></li>
+                <li><a onclick="switchPage('arrivals')">New Arrivals</a></li>
+                <li><a onclick="switchPage('about')">About Us</a></li>
+                <li><a onclick="switchPage('contact')">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <span onclick="toggleSearchBox()" title="Search Products">🔍</span>
-                <span onclick="switchPage('cart')" title="View Cart">🛒</span>
+                <span onclick="openSearchOverlay()" title="Search">🔍</span>
+                <span onclick="switchPage('cart')" title="Cart">🛒</span>
             </div>
-        </div>
-
-        <!-- Real-time Search Box Input Dropdown -->
-        <div class="search-box-container" id="searchBoxContainer">
-            <input type="text" id="searchInput" placeholder="Search for hoodies, tees, jackets..." onkeyup="filterProducts()">
         </div>
     </header>
 
-    <!-- ================= 1. HOME PAGE VIEW ================= -->
+    <!-- Real Search Overlay Modal -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-box-wrap">
+            <button class="close-search" onclick="closeSearchOverlay()">&times;</button>
+            <h3 style="margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">Search Store</h3>
+            <input type="text" id="searchInput" placeholder="Type to search hoodies, tees, jackets..." onkeyup="filterProducts()">
+        </div>
+    </div>
+
+    <!-- ================= PAGE 1: HOME ================= -->
     <div id="page-home" class="page-section active-page">
         <section class="hero">
             <div class="hero-content">
@@ -492,13 +535,13 @@
         <div class="container">
             <h2 class="section-title">Shop By Categories</h2>
             <div class="cat-grid">
-                <div class="cat-card" style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80');" onclick="switchPage('shop')">
+                <div class="cat-card" style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80');" onclick="switchPage('collections')">
                     <h3>Oversized Hoodies</h3>
                 </div>
-                <div class="cat-card" style="background-image: url('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80');" onclick="switchPage('shop')">
+                <div class="cat-card" style="background-image: url('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80');" onclick="switchPage('collections')">
                     <h3>Streetwear Tees</h3>
                 </div>
-                <div class="cat-card" style="background-image: url('https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80');" onclick="switchPage('shop')">
+                <div class="cat-card" style="background-image: url('https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80');" onclick="switchPage('collections')">
                     <h3>Jackets & Denims</h3>
                 </div>
             </div>
@@ -506,7 +549,7 @@
 
         <div class="container">
             <h2 class="section-title">Trending Styles</h2>
-            <div class="prod-grid" id="home-products">
+            <div class="prod-grid">
                 <div class="prod-card" data-name="Classic Black Oversized Hoodie" onclick="openProductDetail('Classic Black Oversized Hoodie', '₹1,499', 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80')">
                     <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80');"></div>
                     <div class="prod-info">
@@ -521,29 +564,15 @@
                         <div class="price">₹799</div>
                     </div>
                 </div>
-                <div class="prod-card" data-name="Vintage Denim Jacket" onclick="openProductDetail('Vintage Denim Jacket', '₹2,299', 'https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80')">
-                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80');"></div>
-                    <div class="prod-info">
-                        <h4>Vintage Denim Jacket</h4>
-                        <div class="price">₹2,299</div>
-                    </div>
-                </div>
-                <div class="prod-card" data-name="Urban Streetwear Combo" onclick="openProductDetail('Urban Streetwear Combo', '₹1,999', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80')">
-                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80');"></div>
-                    <div class="prod-info">
-                        <h4>Urban Streetwear Combo</h4>
-                        <div class="price">₹1,999</div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- ================= 2. ALL PRODUCTS / SHOP PAGE VIEW ================= -->
+    <!-- ================= PAGE 2: SHOP ALL ================= -->
     <div id="page-shop" class="page-section">
         <div class="container">
             <h2 class="section-title">All Products Catalogue</h2>
-            <div class="prod-grid" id="shop-products">
+            <div class="prod-grid" id="all-products-grid">
                 <div class="prod-card" data-name="Classic Black Oversized Hoodie" onclick="openProductDetail('Classic Black Oversized Hoodie', '₹1,499', 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80')">
                     <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80');"></div>
                     <div class="prod-info">
@@ -576,7 +605,7 @@
         </div>
     </div>
 
-    <!-- ================= 3. COLLECTIONS PAGE VIEW ================= -->
+    <!-- ================= PAGE 3: COLLECTIONS ================= -->
     <div id="page-collections" class="page-section">
         <div class="container">
             <h2 class="section-title">Explore Collections</h2>
@@ -594,7 +623,69 @@
         </div>
     </div>
 
-    <!-- ================= 4. PRODUCT DETAIL VIEW ================= -->
+    <!-- ================= PAGE 4: MEN ================= -->
+    <div id="page-men" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Men's Collection</h2>
+            <div class="prod-grid">
+                <div class="prod-card" data-name="Classic Black Oversized Hoodie" onclick="openProductDetail('Classic Black Oversized Hoodie', '₹1,499', 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80')">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80');"></div>
+                    <div class="prod-info">
+                        <h4>Classic Black Oversized Hoodie</h4>
+                        <div class="price">₹1,499</div>
+                    </div>
+                </div>
+                <div class="prod-card" data-name="Vintage Denim Jacket" onclick="openProductDetail('Vintage Denim Jacket', '₹2,299', 'https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80')">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80');"></div>
+                    <div class="prod-info">
+                        <h4>Vintage Denim Jacket</h4>
+                        <div class="price">₹2,299</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 5: WOMEN ================= -->
+    <div id="page-women" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Women's Collection</h2>
+            <div class="prod-grid">
+                <div class="prod-card" data-name="Essential Graphic Tee" onclick="openProductDetail('Essential Graphic Tee', '₹799', 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80')">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80');"></div>
+                    <div class="prod-info">
+                        <h4>Essential Graphic Tee</h4>
+                        <div class="price">₹799</div>
+                    </div>
+                </div>
+                <div class="prod-card" data-name="Urban Streetwear Combo" onclick="openProductDetail('Urban Streetwear Combo', '₹1,999', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80')">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80');"></div>
+                    <div class="prod-info">
+                        <h4>Urban Streetwear Combo</h4>
+                        <div class="price">₹1,999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 6: NEW ARRIVALS ================= -->
+    <div id="page-arrivals" class="page-section">
+        <div class="container">
+            <h2 class="section-title">New Arrivals</h2>
+            <div class="prod-grid">
+                <div class="prod-card" data-name="Essential Graphic Tee" onclick="openProductDetail('Essential Graphic Tee', '₹799', 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80')">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80');"></div>
+                    <div class="prod-info">
+                        <h4>Essential Graphic Tee</h4>
+                        <div class="price">₹799</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 7: PRODUCT DETAIL ================= -->
     <div id="page-detail" class="page-section">
         <div class="container">
             <button class="btn" style="margin-bottom: 30px;" onclick="switchPage('shop')">&larr; Back to Shop</button>
@@ -610,7 +701,7 @@
         </div>
     </div>
 
-    <!-- ================= 5. CART & CHECKOUT PAGE VIEW ================= -->
+    <!-- ================= PAGE 8: CART ================= -->
     <div id="page-cart" class="page-section">
         <div class="container">
             <h2 class="section-title">Shopping Cart</h2>
@@ -637,12 +728,38 @@
                 <p><span>Subtotal:</span> <span>₹1,499</span></p>
                 <p><span>Shipping:</span> <span>FREE</span></p>
                 <p class="total"><span>Total Amount:</span> <span>₹1,499</span></p>
-                <button class="btn" style="width: 100%; margin-top: 15px;" onclick="alert('Order placed successfully! Thank you for shopping with HIFUN 3.')">Proceed to Checkout</button>
+                <button class="btn" style="width: 100%; margin-top: 15px;" onclick="switchPage('checkout')">Proceed to Checkout</button>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- ================= PAGE 9: CHECKOUT ================= -->
+    <div id="page-checkout" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Checkout</h2>
+            <div style="max-width: 600px; margin: 0 auto; background: #f9f9f9; padding: 30px; border-radius: 6px;">
+                <h3 style="margin-bottom: 20px;">Shipping Details</h3>
+                <input type="text" placeholder="Full Name" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="email" placeholder="Email Address" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="text" placeholder="Shipping Address & City" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                <button class="btn" style="width: 100%;" onclick="alert('Order Placed Successfully! Thank you for choosing HIFUN 3.'); switchPage('home');">Complete Order (COD / Prepaid)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 10: ABOUT US ================= -->
+    <div id="page-about" class="page-section">
+        <div class="container">
+            <h2 class="section-title">About HIFUN 3</h2>
+            <div class="static-page-content">
+                <p>HIFUN 3 is a contemporary streetwear and apparel brand dedicated to bringing high-quality fashion, absolute comfort, and modern elegance directly to your wardrobe. We believe in crafting style statements that help you wear your joy every single day.</p>
+                <h3>Our Mission</h3>
+                <p>To redefine urban fashion standards with premium fabrics, sustainable practices, and flawless customer experiences.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer with Proper Linked Options -->
     <footer>
         <div class="footer-container">
             <div class="footer-col">
@@ -653,22 +770,23 @@
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a onclick="switchPage('home')">Home</a></li>
-                    <li><a onclick="switchPage('shop')">All Products</a></li>
+                    <li><a onclick="switchPage('shop')">Shop All</a></li>
                     <li><a onclick="switchPage('collections')">Collections</a></li>
                     <li><a onclick="switchPage('cart')">View Cart</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Customer Policies</h4>
+                <h4>Categories</h4>
                 <ul>
-                    <li><a>Shipping & Delivery</a></li>
-                    <li><a>Returns & Exchanges</a></li>
-                    <li><a>Terms of Service</a></li>
-                    <li><a>Privacy Policy</a></li>
+                    <li><a onclick="switchPage('men')">Men's Wear</a></li>
+                    <li><a onclick="switchPage('women')">Women's Wear</a></li>
+                    <li><a onclick="switchPage('arrivals')">New Arrivals</a></li>
+                    <li><a onclick="switchPage('about')">About Us</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Get in Touch</h4>
+                <p onclick="switchPage('contact')" style="cursor:pointer; color:#fff;">Contact Page</p>
                 <p>Email: support@hifun3.com</p>
                 <p>Mon - Sat: 10:00 AM - 7:00 PM</p>
             </div>
@@ -678,7 +796,7 @@
         </div>
     </footer>
 
-    <!-- Script for Navigation, Search, and Dynamic Pages -->
+    <!-- Script for Handling 10 Pages & Real Search Overlay Modal -->
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
@@ -691,20 +809,27 @@
             const pages = document.querySelectorAll('.page-section');
             pages.forEach(page => page.classList.remove('active-page'));
 
-            document.getElementById('page-' + pageId).classList.add('active-page');
+            // Check if page exists before adding class
+            const targetPage = document.getElementById('page-' + pageId);
+            if(targetPage) {
+                targetPage.classList.add('active-page');
+            } else {
+                // Fallback for Contact page or generic static pages
+                document.getElementById('page-about').classList.add('active-page');
+            }
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
             navLinks.classList.remove('active');
-            
-            // Hide search box when switching page
-            document.getElementById('searchBoxContainer').classList.remove('active');
+            closeSearchOverlay();
         }
 
-        function toggleSearchBox() {
-            const searchBox = document.getElementById('searchBoxContainer');
-            searchBox.classList.toggle('active');
-            if(searchBox.classList.contains('active')) {
-                document.getElementById('searchInput').focus();
-            }
+        function openSearchOverlay() {
+            document.getElementById('searchOverlay').classList.add('active');
+            document.getElementById('searchInput').focus();
+        }
+
+        function closeSearchOverlay() {
+            document.getElementById('searchOverlay').classList.remove('active');
         }
 
         // Real-time Search Filter Logic
