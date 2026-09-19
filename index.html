@@ -51,19 +51,21 @@
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a { font-size: 0.92rem; font-weight: 500; color: var(--ink); opacity: 0.75; transition: opacity .15s; cursor: pointer; }
   .nav-links a:hover { opacity: 1; }
-  .nav-right { display: flex; align-items: center; gap: 16px; }
   
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    background: var(--ink); color: var(--paper);
-    padding: 12px 24px; font-size: 0.88rem; font-weight: 600;
-    border: none; cursor: pointer; white-space: nowrap;
-    transition: background 0.2s;
+  .nav-right { display: flex; align-items: center; gap: 18px; }
+  .icon-btn {
+    background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    position: relative; padding: 6px; color: var(--ink); transition: color 0.2s;
   }
-  .btn:hover { background: var(--accent); }
-  .btn-accent { background: var(--accent); color: var(--accent-ink); }
-  .btn-accent:hover { background: var(--ink); }
+  .icon-btn:hover { color: var(--accent); }
+  .icon-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   
+  .cart-badge {
+    position: absolute; top: 2px; right: 2px; background: var(--accent); color: var(--accent-ink);
+    font-size: 0.65rem; font-weight: 700; width: 16px; height: 16px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+
   .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
   .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--ink); margin: 5px 0; }
 
@@ -77,103 +79,97 @@
     .nav-links li { width: 100%; }
     .nav-links a { display: block; padding: 16px 32px; border-top: 1px solid var(--line); opacity: 1; }
     .menu-toggle { display: block; }
-    .nav-right .btn-text { display: none; }
   }
 
-  /* ---------- Big Image Banner (Coming Soon Hero Banner) ---------- */
+  /* ---------- Search Overlay ---------- */
+  .search-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+    z-index: 2500; display: flex; align-items: flex-start; justify-content: center;
+    padding-top: 100px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+  }
+  .search-overlay.active { opacity: 1; pointer-events: auto; }
+  .search-box {
+    background: var(--paper); width: 90%; max-width: 600px; padding: 24px; border-radius: 6px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 12px;
+  }
+  .search-box input {
+    flex: 1; border: none; font-size: 1.1rem; outline: none; font-family: 'Inter', sans-serif; color: var(--ink);
+  }
+  .search-box button { background: none; border: none; cursor: pointer; font-size: 1.2rem; color: var(--muted); }
+
+  /* ---------- Right Slide-out Cart Drawer ---------- */
+  .cart-drawer {
+    position: fixed; top: 0; right: -400px; width: 100%; max-width: 380px; height: 100%;
+    background: var(--paper); z-index: 3000; box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+    transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;
+  }
+  .cart-drawer.active { right: 0; }
+  .cart-header {
+    padding: 24px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between;
+  }
+  .cart-header h3 { font-size: 1.2rem; font-family: 'Anton', sans-serif; letter-spacing: 0.5px; }
+  .cart-close { background: none; border: none; font-size: 1.4rem; cursor: pointer; }
+  .cart-body { padding: 24px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+  .cart-item { display: flex; gap: 14px; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .cart-item img { width: 60px; height: 75px; object-fit: cover; border-radius: 4px; background: var(--stone); }
+  .cart-item-info h5 { font-size: 0.92rem; font-weight: 500; margin-bottom: 4px; }
+  .cart-item-info p { font-size: 0.88rem; font-weight: 700; color: var(--accent); }
+  .cart-footer { padding: 24px; border-top: 1px solid var(--line); background: var(--stone); }
+  .cart-total { display: flex; justify-content: space-between; font-weight: 700; font-size: 1.05rem; margin-bottom: 16px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--ink); color: var(--paper); width: 100%;
+    padding: 12px 24px; font-size: 0.88rem; font-weight: 600;
+    border: none; cursor: pointer; white-space: nowrap;
+    transition: background 0.2s; text-align: center;
+  }
+  .btn:hover { background: var(--accent); }
+  .btn-accent { background: var(--accent); color: var(--accent-ink); }
+  .btn-accent:hover { background: var(--ink); }
+
+  /* ---------- Big Image Banner ---------- */
   .image-banner {
-    position: relative;
-    height: 480px;
-    background-color: var(--ink);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    position: relative; height: 480px; background-color: var(--ink); overflow: hidden;
+    display: flex; align-items: center; justify-content: center; text-align: center;
   }
   .image-banner img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    opacity: 0.45;
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.45;
   }
-  .image-banner-content {
-    position: relative;
-    z-index: 2;
-    color: var(--paper);
-    max-width: 700px;
-    padding: 0 24px;
-  }
+  .image-banner-content { position: relative; z-index: 2; color: var(--paper); max-width: 700px; padding: 0 24px; }
   .image-banner-content span.badge {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--accent-ink);
-    padding: 6px 16px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    border-radius: 4px;
+    display: inline-block; background: var(--accent); color: var(--accent-ink);
+    padding: 6px 16px; font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; border-radius: 4px;
   }
-  .image-banner-content h2 {
-    font-size: clamp(2.8rem, 5vw, 4.2rem);
-    margin-bottom: 12px;
-  }
-  .image-banner-content p {
-    font-size: 1.05rem;
-    color: #E2DFD5;
-    margin-bottom: 24px;
-  }
+  .image-banner-content h2 { font-size: clamp(2.8rem, 5vw, 4.2rem); margin-bottom: 12px; }
+  .image-banner-content p { font-size: 1.05rem; color: #E2DFD5; margin-bottom: 24px; }
 
   /* ---------- Hero Section with Image Slider ---------- */
   .hero {
-    display: grid; grid-template-columns: 1fr 1fr;
-    min-height: 580px;
-    background: var(--paper);
-    position: relative;
+    display: grid; grid-template-columns: 1fr 1fr; min-height: 580px; background: var(--paper); position: relative;
   }
-  .hero-copy {
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 60px 32px; max-width: 580px; margin-left: auto;
-  }
-  .hero-copy h1 {
-    font-size: clamp(3rem, 6vw, 5.4rem);
-  }
+  .hero-copy { display: flex; flex-direction: column; justify-content: center; padding: 60px 32px; max-width: 580px; margin-left: auto; }
+  .hero-copy h1 { font-size: clamp(3rem, 6vw, 5.4rem); }
   .hero-copy h1 span { display: block; }
-  .hero-copy p {
-    margin-top: 20px; font-size: 1.05rem; color: var(--muted); max-width: 440px; line-height: 1.6;
-  }
+  .hero-copy p { margin-top: 20px; font-size: 1.05rem; color: var(--muted); max-width: 440px; line-height: 1.6; }
   .hero-actions { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
   
-  .hero-img {
-    position: relative; overflow: hidden; background: var(--stone); min-height: 480px;
-  }
+  .hero-img { position: relative; overflow: hidden; background: var(--stone); min-height: 480px; }
   .hero-img .slide {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; object-position: center 20%;
-    opacity: 0; transition: opacity 0.8s ease-in-out;
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; opacity: 0; transition: opacity 0.8s ease-in-out;
   }
   .hero-img .slide.active { opacity: 1; }
   .slider-arrow {
     position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
-    width: 40px; height: 40px; border: none; border-radius: 50%;
-    background: rgba(255, 255, 255, 0.9); color: var(--ink);
-    font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 40px; height: 40px; border: none; border-radius: 50%; background: rgba(255, 255, 255, 0.9); color: var(--ink);
+    font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
   .slider-arrow.prev { left: 16px; }
   .slider-arrow.next { right: 16px; }
   .slider-dots {
-    position: absolute; bottom: 20px; left: 0; width: 100%; z-index: 10;
-    display: flex; justify-content: center; gap: 8px;
+    position: absolute; bottom: 20px; left: 0; width: 100%; z-index: 10; display: flex; justify-content: center; gap: 8px;
   }
   .slider-dots .dot {
-    width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0;
-    background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: width 0.2s;
+    width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: width 0.2s;
   }
   .slider-dots .dot.active { background: var(--paper); width: 24px; border-radius: 4px; }
 
@@ -185,29 +181,17 @@
   }
 
   /* ---------- Sections Common ---------- */
-  section {
-    padding: 90px 0;
-    position: relative;
-  }
-  .section-head {
-    display: flex; align-items: flex-end; justify-content: space-between;
-    margin-bottom: 40px; flex-wrap: wrap; gap: 16px;
-  }
+  section { padding: 90px 0; position: relative; }
+  .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; flex-wrap: wrap; gap: 16px; }
   .section-head h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); }
   .section-head a { font-size: 0.92rem; font-weight: 600; border-bottom: 2px solid var(--ink); padding-bottom: 2px; cursor: pointer; }
   .section-head a:hover { color: var(--accent); border-color: var(--accent); }
 
   /* ---------- Categories Grid ---------- */
   .categories { background: var(--paper); }
-  .categories-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-  }
-  .cat-card {
-    position: relative; height: 460px; overflow: hidden; background: var(--stone); display: block; border-radius: 4px; cursor: pointer;
-  }
-  .cat-card img {
-    width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
+  .categories-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .cat-card { position: relative; height: 460px; overflow: hidden; background: var(--stone); display: block; border-radius: 4px; cursor: pointer; }
+  .cat-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
   .cat-card:hover img { transform: scale(1.05); }
   .cat-content {
     position: absolute; inset: 0; background: linear-gradient(to top, rgba(17,17,16,0.7) 0%, transparent 60%);
@@ -255,53 +239,23 @@
     .prod-row { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   }
 
-  /* ---------- In-Page Modal / Quick View Popup ---------- */
-  .modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
-    z-index: 2000; display: flex; align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-  }
-  .modal-overlay.active { opacity: 1; pointer-events: auto; }
-  .modal-card {
-    background: var(--paper); width: 90%; max-width: 500px; padding: 40px; border-radius: 6px; position: relative;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2); transform: translateY(20px); transition: transform 0.3s ease;
-  }
-  .modal-overlay.active .modal-card { transform: translateY(0); }
-  .modal-close {
-    position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;
-  }
-  .modal-card h3 { font-size: 1.6rem; margin-bottom: 10px; font-family: 'Anton', sans-serif; }
-  .modal-card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; }
-
   /* ---------- CTA Banner ---------- */
-  .cta-banner {
-    background: var(--ink); color: var(--paper);
-    padding: 100px 0; text-align: left;
-  }
+  .cta-banner { background: var(--ink); color: var(--paper); padding: 100px 0; text-align: left; }
   .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
   .cta-banner h2 { font-size: clamp(2.4vw, 5vw, 3.8rem); max-width: 650px; }
   .cta-banner p { color: #A8A69F; margin-top: 14px; max-width: 420px; font-size: 1.05rem; }
 
   /* ---------- Footer ---------- */
-  footer {
-    background: var(--paper); padding: 70px 0 30px; border-top: 1px solid var(--line);
-  }
-  .footer-grid {
-    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 50px; border-bottom: 1px solid var(--line);
-  }
+  footer { background: var(--paper); padding: 70px 0 30px; border-top: 1px solid var(--line); }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 50px; border-bottom: 1px solid var(--line); }
   .footer-grid h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 20px; letter-spacing: 0.5px; }
   .footer-grid ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
   .footer-grid ul a, .footer-grid p { font-size: 0.9rem; color: var(--muted); cursor: pointer; }
   .footer-grid ul a:hover { color: var(--ink); }
   .footer-logo svg { height: 36px; width: auto; margin-bottom: 12px; }
-  .footer-bottom {
-    display: flex; justify-content: space-between; align-items: center; padding-top: 28px;
-    font-size: 0.82rem; color: var(--muted); flex-wrap: wrap; gap: 12px;
-  }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; font-size: 0.82rem; color: var(--muted); flex-wrap: wrap; gap: 12px; }
   .social-row { display: flex; gap: 12px; }
-  .social-row a {
-    width: 38px; height: 38px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; border-radius: 4px; cursor: pointer;
-  }
+  .social-row a { width: 38px; height: 38px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; border-radius: 4px; cursor: pointer; }
   .social-row a:hover { border-color: var(--ink); background: var(--stone); }
   .social-row svg { width: 16px; height: 16px; stroke: var(--ink); }
 
@@ -330,10 +284,20 @@
         <li><a class="nav-scroll" data-target="story">About</a></li>
         <li><a class="nav-scroll" data-target="footer">Contact</a></li>
       </ul>
+
       <div class="nav-right">
-        <!-- <button class="btn btn-accent" id="openShopBtn">
-          <span class="btn-text">Shop Now</span>
-        </button> -->
+        <!-- Search Icon Button -->
+        <button class="icon-btn" id="searchOpenBtn" aria-label="Search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+
+        <!-- Cart Icon Button -->
+        <button class="icon-btn" id="cartOpenBtn" aria-label="Cart">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" id="cartCount">1</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
           <span></span><span></span><span></span>
         </button>
@@ -341,14 +305,47 @@
     </div>
   </header>
 
-  <!-- Coming Soon Image Banner (Placed right below Header) -->
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Search hoodies, tees, jackets..." autofocus>
+      <button id="searchCloseBtn">&times;</button>
+    </div>
+  </div>
+
+  <!-- Cart Drawer (Right Side) -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>Your Cart (1)</h3>
+      <button class="cart-close" id="cartCloseBtn">&times;</button>
+    </div>
+    <div class="cart-body">
+      <div class="cart-item">
+        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=300&q=80" alt="Hoodie">
+        <div class="cart-item-info">
+          <h5>Heavyweight Oversized Hoodie</h5>
+          <p>₹1,499</p>
+        </div>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Subtotal</span>
+        <span>₹1,499</span>
+      </div>
+      <button class="btn btn-accent" id="checkoutBtn">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- Coming Soon Image Banner -->
   <section class="image-banner" id="top">
     <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80" alt="Coming Soon Banner">
     <div class="image-banner-content">
       <span class="badge">Coming Soon</span>
       <h2 class="display">Store Launching Soon</h2>
       <p>Free shipping on all prepaid orders &nbsp;·&nbsp; Cash on delivery available everywhere</p>
-      <button class="btn btn-accent" id="bannerQuickView">Explore Collection &rarr;</button>
+      <button class="btn btn-accent" id="bannerQuickView" style="width: auto; padding: 12px 28px; margin: 0 auto;">Explore Collection &rarr;</button>
     </div>
   </section>
 
@@ -362,8 +359,8 @@
       </h1>
       <p>Oversized hoodies, graphic tees and jackets, cut for comfort and built to move with you. Made for the everyday, not the runway.</p>
       <div class="hero-actions">
-        <button class="btn btn-accent" id="heroShopBtn">Shop the collection</button>
-        <button class="btn nav-scroll" data-target="categories" style="background:transparent;color:var(--ink);border:1px solid var(--line);">Browse categories</button>
+        <button class="btn btn-accent" id="heroShopBtn" style="width:auto;">Shop the collection</button>
+        <button class="btn nav-scroll" data-target="categories" style="width:auto; background:transparent; color:var(--ink); border:1px solid var(--line);">Browse categories</button>
       </div>
     </div>
     <div class="hero-img" id="heroSlider">
@@ -466,7 +463,7 @@
         <h2 class="display">Full collection<br>is live now</h2>
         <p>Browse every drop, select your size, and explore items securely in under a minute.</p>
       </div>
-      <button class="btn btn-accent" id="ctaShopBtn">Explore Collection &rarr;</button>
+      <button class="btn btn-accent" id="ctaShopBtn" style="width:auto;">Explore Collection &rarr;</button>
     </div>
   </section>
 
@@ -522,56 +519,42 @@
     </div>
   </footer>
 
-  <!-- In-Page Modal / Quick View Popup -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-card">
-      <button class="modal-close" id="modalClose">&times;</button>
-      <h3 id="modalTitle">HIFUN 3 Store</h3>
-      <p id="modalDesc">Select your preferred option or view items directly within the page experience.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <button class="btn btn-accent" id="modalActionBtn" style="flex:1;">Add to Cart / Order</button>
-        <button class="btn" id="modalCloseBtn" style="flex:1;">Close</button>
-      </div>
-    </div>
-  </div>
-
   <script>
+    // Mobile Navigation Toggle
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
     navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-    // In-page Modal triggers
-    const modalOverlay = document.getElementById('modalOverlay');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalClose = document.getElementById('modalClose');
-    const modalCloseBtn = document.getElementById('modalCloseBtn');
-    const modalActionBtn = document.getElementById('modalActionBtn');
+    // Search Modal Functionality
+    const searchOpenBtn = document.getElementById('searchOpenBtn');
+    const searchCloseBtn = document.getElementById('searchCloseBtn');
+    const searchOverlay = document.getElementById('searchOverlay');
+    const searchInput = document.getElementById('searchInput');
 
-    function openModal(title, desc, actionText = 'Close'){
-      modalTitle.textContent = title;
-      modalDesc.textContent = desc;
-      modalActionBtn.textContent = actionText;
-      modalOverlay.classList.add('active');
-    }
-
-    function closeModal(){
-      modalOverlay.classList.remove('active');
-    }
-
-    modalClose.addEventListener('click', closeModal);
-    modalCloseBtn.addEventListener('click', closeModal);
-    modalActionBtn.addEventListener('click', () => {
-      alert('Aapka item successfully select ho gaya hai!');
-      closeModal();
+    searchOpenBtn.addEventListener('click', () => {
+      searchOverlay.classList.add('active');
+      setTimeout(() => searchInput.focus(), 100);
     });
-    modalOverlay.addEventListener('click', (e) => {
-      if(e.target === modalOverlay) closeModal();
+    searchCloseBtn.addEventListener('click', () => searchOverlay.classList.remove('active'));
+    searchOverlay.addEventListener('click', (e) => {
+      if(e.target === searchOverlay) searchOverlay.classList.remove('active');
     });
 
-    // Buttons triggering in-page experience
-    document.getElementById('openShopBtn').addEventListener('click', () => openModal('HIFUN 3 Catalog', 'Browse all oversized hoodies, tees, and jackets right here on the page.', 'View Trending'));
+    // Cart Drawer Functionality (Right Slide)
+    const cartOpenBtn = document.getElementById('cartOpenBtn');
+    const cartCloseBtn = document.getElementById('cartCloseBtn');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    cartOpenBtn.addEventListener('click', () => cartDrawer.classList.add('active'));
+    cartCloseBtn.addEventListener('click', () => cartDrawer.classList.remove('active'));
+    checkoutBtn.addEventListener('click', () => {
+      alert('Aapka order process secure tarike se initialized ho gaya hai!');
+      cartDrawer.classList.remove('active');
+    });
+
+    // Scroll Triggers & Buttons
     document.getElementById('heroShopBtn').addEventListener('click', () => {
       document.getElementById('products').scrollIntoView({behavior: 'smooth'});
     });
@@ -581,41 +564,32 @@
     document.getElementById('bannerQuickView').addEventListener('click', () => {
       document.getElementById('products').scrollIntoView({behavior: 'smooth'});
     });
-    document.getElementById('viewAllProd').addEventListener('click', () => {
-      openModal('Full Collection', 'Saare available drops upar section mein diye gaye hain. Kisi bhi item par click karke details dekhein.');
-    });
 
-    // Product triggers
     document.querySelectorAll('.product-trigger').forEach(item => {
       item.addEventListener('click', () => {
-        const name = item.getAttribute('data-item') || 'Streetwear Item';
-        const price = item.getAttribute('data-price') || '₹1,299';
-        openModal(name, 'Price: ' + price + ' — High-grade fabric, tailored oversized streetwear fit designed for everyday comfort.', 'Add to Cart');
+        const name = item.getAttribute('data-item');
+        const price = item.getAttribute('data-price');
+        alert(name + ' (' + price + ') selected! Aap cart icon par click karke details dekh sakte hain.');
       });
     });
 
-    // Policy triggers
     document.querySelectorAll('.policy-trigger').forEach(item => {
       item.addEventListener('click', () => {
-        const title = item.getAttribute('data-title');
-        openModal(title, 'HIFUN 3 par milti hai 7-day easy returns policy aur fast nationwide shipping.');
+        alert(item.getAttribute('data-title') + ': 7-day hassle free return and fast shipping.');
       });
     });
 
-    // Social triggers
     document.querySelectorAll('.social-trigger').forEach(item => {
       item.addEventListener('click', () => {
-        const social = item.getAttribute('data-social');
-        openModal(social + ' Connect', 'Hamare official ' + social + ' page par judne ke liye jald hi direct link update hoga.');
+        alert('Official ' + item.getAttribute('data-social') + ' link update kiya ja raha hai.');
       });
     });
 
-    // Footer smooth scroll links
     document.querySelectorAll('.nav-scroll').forEach(link => {
       link.addEventListener('click', () => {
         const targetId = link.getAttribute('data-target');
-        const targetEl = document.getElementById(targetId);
-        if(targetEl) targetEl.scrollIntoView({behavior: 'smooth'});
+        const el = document.getElementById(targetId);
+        if(el) el.scrollIntoView({behavior: 'smooth'});
       });
     });
 
