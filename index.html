@@ -46,6 +46,8 @@
     font-size:0.8rem;
     padding:10px 16px;
     letter-spacing:0.3px;
+    position:relative;
+    z-index:600;
   }
   .announce b{color:var(--accent);}
 
@@ -95,7 +97,9 @@
   /* ---------- Hero ---------- */
   .hero{
     display:grid;grid-template-columns:1fr 1fr;
-    min-height:640px;
+    min-height:600px;
+    position:relative;
+    background:var(--paper);
   }
   .hero-copy{
     display:flex;flex-direction:column;justify-content:center;
@@ -117,7 +121,7 @@
   }
   .hero-actions{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;}
   .hero-img{
-    position:relative;overflow:hidden;background:var(--stone);
+    position:relative;overflow:hidden;background:var(--stone);min-height:450px;
   }
   .hero-img .slide{
     position:absolute;inset:0;width:100%;height:100%;
@@ -127,7 +131,7 @@
   }
   .hero-img .slide.active{opacity:1;}
   .slider-arrow{
-    position:absolute;top:50%;transform:translateY(-50%);z-index:5;
+    position:absolute;top:50%;transform:translateY(-50%);z-index:10;
     width:38px;height:38px;border:none;border-radius:50%;
     background:rgba(255,255,255,0.85);color:var(--ink);
     font-size:1.2rem;line-height:1;cursor:pointer;
@@ -137,7 +141,7 @@
   .slider-arrow.prev{left:16px;}
   .slider-arrow.next{right:16px;}
   .slider-dots{
-    position:absolute;bottom:18px;left:0;width:100%;z-index:5;
+    position:absolute;bottom:18px;left:0;width:100%;z-index:10;
     display:flex;justify-content:center;gap:8px;
   }
   .slider-dots .dot{
@@ -153,9 +157,16 @@
   }
 
   /* ---------- Coming soon banner ---------- */
-  .soon-banner{background:var(--stone);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .soon-banner{
+    background:var(--stone);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    position:relative;
+    z-index:10;
+    clear:both;
+  }
   .soon-inner{
-    padding:44px 32px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;justify-content:space-between;
+    padding:36px 32px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;justify-content:space-between;
   }
   .soon-text{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
   .soon-badge{
@@ -181,13 +192,18 @@
   .section-head a:hover{color:var(--accent);border-color:var(--accent);}
 
   /* ---------- Category mosaic ---------- */
-  .categories{padding:90px 0;}
+  .categories{
+    padding:90px 0;
+    position:relative;
+    background:var(--paper);
+    clear:both;
+  }
   .mosaic{
     display:grid;grid-template-columns:1.3fr 1fr;gap:18px;height:560px;
   }
   .mosaic-col{display:grid;grid-template-rows:1fr 1fr;gap:18px;}
   .tile{
-    position:relative;overflow:hidden;background:var(--stone);cursor:pointer;
+    position:relative;overflow:hidden;background:var(--stone);cursor:pointer;display:block;
   }
   .tile img{
     width:100%;height:100%;object-fit:cover;
@@ -210,7 +226,12 @@
   }
 
   /* ---------- Story / trust ---------- */
-  .story{background:var(--stone);padding:90px 0;}
+  .story{
+    background:var(--stone);
+    padding:90px 0;
+    position:relative;
+    clear:both;
+  }
   .story-grid{display:grid;grid-template-columns:0.85fr 1fr 0.9fr;gap:50px;align-items:start;}
   .story-img{aspect-ratio:4/5;overflow:hidden;background:var(--line);}
   .story-img img{width:100%;height:100%;object-fit:cover;}
@@ -228,11 +249,16 @@
   }
 
   /* ---------- Products ---------- */
-  .products{padding:90px 0;}
+  .products{
+    padding:90px 0;
+    position:relative;
+    background:var(--paper);
+    clear:both;
+  }
   .prod-row{
     display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
   }
-  .prod{cursor:pointer;}
+  .prod{cursor:pointer;display:block;}
   .prod-img{aspect-ratio:4/5;background:var(--stone);overflow:hidden;}
   .prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
   .prod:hover .prod-img img{transform:scale(1.04);}
@@ -248,13 +274,21 @@
   .cta-banner{
     background:var(--ink);color:var(--paper);
     padding:100px 32px;text-align:left;
+    position:relative;
+    clear:both;
   }
   .cta-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
   .cta-banner h2{font-size:clamp(2.2rem,5vw,3.6rem);max-width:640px;}
   .cta-banner p{color:#B9B7B2;margin-top:14px;max-width:420px;}
 
   /* ---------- Footer ---------- */
-  footer{padding:70px 0 30px;}
+  footer{
+    padding:70px 0 30px;
+    background:var(--paper);
+    position:relative;
+    clear:both;
+    border-top:1px solid var(--line);
+  }
   .footer-grid{
     display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:50px;border-bottom:1px solid var(--line);
   }
@@ -285,16 +319,12 @@
 
   <header>
     <div class="nav">
-      <!-- Exact Custom Hexagon Logo Matching Your Image -->
+      <!-- Custom Hexagon Logo Matching Your Image -->
       <a class="logo-link" href="#top">
         <svg viewBox="0 0 220 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Hexagon Icon -->
           <path d="M26 3L46 14.5V36.5L26 48L6 36.5V14.5L26 3Z" stroke="#D4AF37" stroke-width="3.5" fill="#111110"/>
-          <!-- H inside Hexagon (White) -->
           <path d="M16 17V34M36 17V34M16 25.5H36" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
-          <!-- 3 inside Hexagon (Gold) -->
           <path d="M30 17H40V25.5H35M35 25.5H40V34H30" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- HIFUN Text below/beside or integrated -->
           <text x="56" y="37" font-family="'Anton', sans-serif" font-size="34" letter-spacing="2" fill="#111110">HIFUN</text>
         </svg>
       </a>
@@ -340,6 +370,7 @@
     </div>
   </section>
 
+  <!-- Coming Soon Banner Restored -->
   <section class="soon-banner">
     <div class="wrap soon-inner">
       <div class="soon-text">
@@ -441,7 +472,7 @@
     </div>
   </section>
 
-  <footer id="footer">
+  <footer>
     <div class="wrap">
       <div class="footer-grid">
         <div>
