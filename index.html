@@ -3,302 +3,372 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIFUN 3 - Wear Your Joy</title>
+    <title>HIFUN 3 - Complete Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
         body {
             background-color: #ffffff;
-            color: #1a1a1a;
+            color: #111;
             overflow-x: hidden;
         }
 
-        /* Top Announcement Bar */
-        .announcement-bar {
-            background-color: #000000;
-            color: #ffffff;
+        /* Top Bar */
+        .top-announcement {
+            background: #000;
+            color: #fff;
             text-align: center;
-            font-size: 0.8rem;
-            padding: 10px;
+            font-size: 0.75rem;
+            padding: 8px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
-        /* Main Sticky Header */
+        /* Header */
         header {
-            background: #ffffff;
-            border-bottom: 1px solid #e5e5e5;
+            background: #fff;
+            border-bottom: 1px solid #eee;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .header-container {
-            max-width: 1400px;
+        .nav-container {
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 18px 40px;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 2rem;
-            font-weight: 800;
+            font-size: 1.8rem;
+            font-weight: 700;
             letter-spacing: 3px;
-            color: #000000;
+            color: #000;
             text-decoration: none;
+            cursor: pointer;
         }
 
-        nav {
+        .nav-links {
             display: flex;
-            align-items: center;
+            list-style: none;
+            gap: 30px;
         }
 
-        nav a {
+        .nav-links li a {
             text-decoration: none;
-            color: #333333;
-            margin-left: 35px;
-            font-size: 0.95rem;
+            color: #333;
+            font-size: 0.9rem;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
+            cursor: pointer;
             transition: color 0.3s;
         }
 
-        nav a:hover {
-            color: #d4af37;
+        .nav-links li a:hover, .nav-links li a.active {
+            color: #b8860b;
         }
 
-        .header-icons {
+        .nav-icons {
             display: flex;
             gap: 20px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
         }
 
-        .hamburger {
+        .menu-toggle {
             display: none;
-            cursor: pointer;
-            font-size: 1.8rem;
             background: none;
             border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
-        /* Hero Slider Banner */
-        .hero-slider {
+        /* Page Views Control */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active-page {
+            display: block;
+        }
+
+        /* Hero Banner (Home Page) */
+        .hero {
             width: 100%;
-            height: 600px;
+            height: 550px;
+            background: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             position: relative;
-            overflow: hidden;
-            background: #111;
-        }
-
-        .slide {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            background-size: cover;
-            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: #ffffff;
+            color: #fff;
         }
 
-        .slide.active {
-            opacity: 1;
-        }
-
-        .slide::after {
+        .hero::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.35);
         }
 
-        .slide-content {
+        .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 800px;
+            max-width: 700px;
             padding: 0 20px;
-            animation: fadeInText 1s ease-out;
         }
 
-        .slide-content h1 {
-            font-size: 3.5rem;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
+        .hero-content h1 {
+            font-size: 3rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
             text-transform: uppercase;
             font-weight: 700;
         }
 
-        .slide-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+        .hero-content p {
+            font-size: 1.05rem;
+            margin-bottom: 25px;
             letter-spacing: 1px;
         }
 
-        .shop-btn {
-            background: #ffffff;
-            color: #000000;
-            padding: 14px 35px;
+        .btn {
+            background: #fff;
+            color: #000;
+            padding: 12px 30px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 2px;
-            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
             display: inline-block;
         }
 
-        .shop-btn:hover {
-            background: #000000;
-            color: #ffffff;
+        .btn:hover {
+            background: #000;
+            color: #fff;
         }
 
-        /* Section Layouts */
+        /* Common Container */
         .container {
-            max-width: 1300px;
-            margin: 80px auto;
-            padding: 0 30px;
+            max-width: 1250px;
+            margin: 60px auto;
+            padding: 0 20px;
         }
 
-        .section-header {
+        .section-title {
             text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-header h2 {
-            font-size: 2.2rem;
-            text-transform: uppercase;
+            font-size: 1.8rem;
+            margin-bottom: 40px;
             letter-spacing: 2px;
-            margin-bottom: 10px;
-            font-weight: 700;
+            text-transform: uppercase;
+            font-weight: 600;
         }
 
-        .section-header p {
-            color: #666;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-        }
-
-        /* Categories Grid */
-        .category-grid {
+        /* Category Grid */
+        .cat-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
 
-        .category-card {
-            height: 450px;
+        .cat-card {
+            height: 400px;
             background-size: cover;
             background-position: center;
             position: relative;
-            border-radius: 6px;
+            border-radius: 4px;
             overflow: hidden;
             display: flex;
             align-items: flex-end;
-            padding: 40px;
+            padding: 30px;
             text-decoration: none;
-            color: white;
-            transition: transform 0.4s;
+            color: #fff;
+            cursor: pointer;
         }
 
-        .category-card::after {
+        .cat-card::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 60%);
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent 60%);
         }
 
-        .category-card h3 {
+        .cat-card h3 {
             position: relative;
             z-index: 2;
-            font-size: 1.6rem;
-            text-transform: uppercase;
+            font-size: 1.3rem;
             letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
         }
 
-        .category-card:hover {
-            transform: translateY(-8px);
-        }
-
-        /* Product Showcase Grid */
-        .product-grid {
+        /* Products Grid */
+        .prod-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
             gap: 30px;
         }
 
-        .product-item {
+        .prod-card {
             background: #fff;
-            border-radius: 6px;
+            border-radius: 4px;
             overflow: hidden;
             transition: box-shadow 0.3s;
+            cursor: pointer;
         }
 
-        .product-item:hover {
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .prod-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
 
-        .product-img {
-            height: 380px;
+        .prod-img {
+            height: 350px;
             background-size: cover;
             background-position: center;
-            background-color: #f0f0f0;
+            background-color: #f4f4f4;
         }
 
-        .product-details {
-            padding: 20px 15px;
+        .prod-info {
+            padding: 18px 10px;
         }
 
-        .product-details h4 {
-            font-size: 1.05rem;
+        .prod-info h4 {
+            font-size: 0.95rem;
             font-weight: 500;
+            color: #333;
             margin-bottom: 8px;
-            color: #222;
         }
 
-        .product-details .price {
+        .prod-info .price {
+            font-size: 1rem;
             font-weight: 700;
-            font-size: 1.1rem;
             color: #000;
         }
 
-        /* Professional Footer */
-        footer {
-            background-color: #111111;
-            color: #ffffff;
-            padding: 80px 40px 30px;
-            margin-top: 100px;
+        /* Product Detail Page Styling */
+        .product-detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
         }
 
-        .footer-grid {
-            max-width: 1300px;
+        .product-detail-img {
+            height: 550px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f4f4f4;
+            border-radius: 6px;
+        }
+
+        .product-detail-info h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #111;
+        }
+
+        .product-detail-info .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .product-detail-info p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        /* Cart Page Styling */
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+
+        .cart-table th, .cart-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+        }
+
+        .cart-table th {
+            font-weight: 600;
+            background: #f9f9f9;
+        }
+
+        .cart-summary {
+            float: right;
+            width: 350px;
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 4px;
+        }
+
+        .cart-summary h3 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .cart-summary p {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .cart-summary .total {
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: #aaa;
+            padding: 70px 20px 20px;
+            margin-top: 80px;
+            clear: both;
+        }
+
+        .footer-container {
+            max-width: 1250px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 50px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
         }
 
         .footer-col h4 {
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 25px;
             color: #fff;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
         }
 
         .footer-col ul {
@@ -306,213 +376,289 @@
         }
 
         .footer-col ul li {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
-        .footer-col ul li a {
-            color: #aaaaaa;
+        .footer-col ul li a, .footer-col p {
+            color: #aaa;
             text-decoration: none;
+            font-size: 0.85rem;
+            cursor: pointer;
             transition: color 0.3s;
-            font-size: 0.95rem;
         }
 
         .footer-col ul li a:hover {
-            color: #ffffff;
+            color: #fff;
         }
 
         .footer-bottom {
-            max-width: 1300px;
+            max-width: 1250px;
             margin: 0 auto;
-            border-top: 1px solid #222222;
-            padding-top: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #777777;
-            font-size: 0.85rem;
+            border-top: 1px solid #222;
+            padding-top: 25px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
         }
 
-        @keyframes fadeInText {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive */
-        @media(max-width: 768px) {
-            .hamburger { display: block; }
-            nav {
+        /* Responsive Mobile Styling */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-links {
                 position: absolute;
-                top: 75px; left: 0; width: 100%;
-                background: #ffffff;
+                top: 70px; left: 0; width: 100%;
+                background: #fff;
                 flex-direction: column;
                 align-items: center;
-                max-height: 0; overflow: hidden;
-                transition: max-height 0.4s ease;
-                border-bottom: 1px solid #ddd;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                border-bottom: 1px solid #eee;
             }
-            nav.active { max-height: 300px; padding: 20px 0; }
-            nav a { margin: 15px 0; }
-            .slide-content h1 { font-size: 2.2rem; }
+            .nav-links.active { max-height: 250px; padding: 20px 0; }
+            .hero-content h1 { font-size: 2.1rem; }
+            .product-detail-container { grid-template-columns: 1fr; gap: 30px; }
+            .product-detail-img { height: 380px; }
+            .cart-summary { width: 100%; float: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Bar -->
-    <div class="announcement-bar">
-        Free Shipping Across India On All Prepaid Orders | Use Code: HIFUN3
+    <!-- Top Announcement Bar -->
+    <div class="top-announcement">
+        Free Shipping on all prepaid orders | Use Code: HIFUN3
     </div>
 
-    <!-- Header -->
+    <!-- Sticky Header -->
     <header>
-        <div class="header-container">
-            <a href="#" class="logo">HIFUN 3</a>
-            <button class="hamburger" id="hamburger">&#9776;</button>
-            <nav id="nav-menu">
-                <a href="#">Men</a>
-                <a href="#">Women</a>
-                <a href="#collections">Collections</a>
-                <a href="#arrival">New Arrivals</a>
-                <a href="#contact">Contact</a>
-            </nav>
-            <div class="header-icons">
-                <span>🔍</span>
-                <span>🛒</span>
+        <div class="nav-container">
+            <a class="logo" onclick="switchPage('home')">HIFUN 3</a>
+            <button class="menu-toggle" id="menuToggle">&#9776;</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a onclick="switchPage('home')" class="active" id="link-home">Home</a></li>
+                <li><a onclick="switchPage('shop')" id="link-shop">Shop All</a></li>
+                <li><a onclick="switchPage('shop')" id="link-men">Men</a></li>
+                <li><a onclick="switchPage('shop')" id="link-women">Women</a></li>
+            </ul>
+            <div class="nav-icons">
+                <span onclick="switchPage('shop')">🔍</span>
+                <span onclick="switchPage('cart')">🛒</span>
             </div>
         </div>
     </header>
 
-    <!-- Hero Banner Slider -->
-    <div class="hero-slider">
-        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1600&q=80');">
-            <div class="slide-content">
+    <!-- ================= 1. HOME PAGE VIEW ================= -->
+    <div id="page-home" class="page-section active-page">
+        <section class="hero">
+            <div class="hero-content">
                 <h1>Wear Your Joy</h1>
-                <p>Redefining contemporary fashion with unmatched quality and comfort.</p>
-                <a href="#arrival" class="shop-btn">Explore Now</a>
+                <p>Discover refined styles crafted for absolute comfort and modern elegance.</p>
+                <button class="btn" onclick="switchPage('shop')">Shop Collection</button>
+            </div>
+        </section>
+
+        <div class="container">
+            <h2 class="section-title">Shop By Categories</h2>
+            <div class="cat-grid">
+                <div class="cat-card" style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80');" onclick="switchPage('shop')">
+                    <h3>Oversized Hoodies</h3>
+                </div>
+                <div class="cat-card" style="background-image: url('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80');" onclick="switchPage('shop')">
+                    <h3>Streetwear Tees</h3>
+                </div>
+                <div class="cat-card" style="background-image: url('https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80');" onclick="switchPage('shop')">
+                    <h3>Jackets & Denims</h3>
+                </div>
             </div>
         </div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1600&q=80');">
-            <div class="slide-content">
-                <h1>Coming Soon: Winter Edit</h1>
-                <p>Crafted to elevate your statement style for the upcoming season.</p>
-                <a href="#arrival" class="shop-btn">Discover More</a>
+
+        <div class="container">
+            <h2 class="section-title">Trending Styles</h2>
+            <div class="prod-grid">
+                <div class="prod-card" onclick="openProductDetail('Classic Black Oversized Hoodie', '₹1,499', 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80')">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80');"></div>
+                    <div class="prod-info">
+                        <h4>Classic Black Oversized Hoodie</h4>
+                        <div class="price">₹1,499</div>
+                    </div>
+                </div>
+                <div class="prod-card" onclick="openProductDetail('Essential Graphic Tee', '₹799', 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80')">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80');"></div>
+                    <div class="prod-info">
+                        <h4>Essential Graphic Tee</h4>
+                        <div class="price">₹799</div>
+                    </div>
+                </div>
+                <div class="prod-card" onclick="openProductDetail('Vintage Denim Jacket', '₹2,299', 'https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80')">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80');"></div>
+                    <div class="prod-info">
+                        <h4>Vintage Denim Jacket</h4>
+                        <div class="price">₹2,299</div>
+                    </div>
+                </div>
+                <div class="prod-card" onclick="openProductDetail('Urban Streetwear Combo', '₹1,999', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80')">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80');"></div>
+                    <div class="prod-info">
+                        <h4>Urban Streetwear Combo</h4>
+                        <div class="price">₹1,999</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Collections Section -->
-    <div class="container" id="collections">
-        <div class="section-header">
-            <h2>Shop By Category</h2>
-            <p>Explore our signature style curation</p>
-        </div>
-        <div class="category-grid">
-            <a href="#" class="category-card" style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80');">
-                <h3>Oversized Hoodies</h3>
-            </a>
-            <a href="#" class="category-card" style="background-image: url('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80');">
-                <h3>Streetwear Tees</h3>
-            </a>
-            <a href="#" class="category-card" style="background-image: url('https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80');">
-                <h3>Jackets & Denims</h3>
-            </a>
+    <!-- ================= 2. SHOP CATALOGUE PAGE VIEW ================= -->
+    <div id="page-shop" class="page-section">
+        <div class="container">
+            <h2 class="section-title">All Products Collection</h2>
+            <div class="prod-grid">
+                <div class="prod-card" onclick="openProductDetail('Classic Black Oversized Hoodie', '₹1,499', 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80')">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80');"></div>
+                    <div class="prod-info">
+                        <h4>Classic Black Oversized Hoodie</h4>
+                        <div class="price">₹1,499</div>
+                    </div>
+                </div>
+                <div class="prod-card" onclick="openProductDetail('Essential Graphic Tee', '₹799', 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80')">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80');"></div>
+                    <div class="prod-info">
+                        <h4>Essential Graphic Tee</h4>
+                        <div class="price">₹799</div>
+                    </div>
+                </div>
+                <div class="prod-card" onclick="openProductDetail('Vintage Denim Jacket', '₹2,299', 'https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80')">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80');"></div>
+                    <div class="prod-info">
+                        <h4>Vintage Denim Jacket</h4>
+                        <div class="price">₹2,299</div>
+                    </div>
+                </div>
+                <div class="prod-card" onclick="openProductDetail('Urban Streetwear Combo', '₹1,999', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80')">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80');"></div>
+                    <div class="prod-info">
+                        <h4>Urban Streetwear Combo</h4>
+                        <div class="price">₹1,999</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- New Arrivals / Products Section -->
-    <div class="container" id="arrival">
-        <div class="section-header">
-            <h2>New Arrivals</h2>
-            <p>Fresh drops straight from our studio</p>
+    <!-- ================= 3. PRODUCT DETAIL PAGE VIEW ================= -->
+    <div id="page-detail" class="page-section">
+        <div class="container">
+            <button class="btn" style="margin-bottom: 30px;" onclick="switchPage('shop')">&larr; Back to Shop</button>
+            <div class="product-detail-container">
+                <div class="product-detail-img" id="detail-img" style="background-image: url('https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80');"></div>
+                <div class="product-detail-info">
+                    <h2 id="detail-title">Classic Black Oversized Hoodie</h2>
+                    <span class="price" id="detail-price">₹1,499</span>
+                    <p>Crafted with premium heavy-gauge cotton fabric to provide superior breathability, extreme comfort, and a lasting trendy streetwear look. Perfect for your casual outings.</p>
+                    <button class="btn" onclick="switchPage('cart')">Add To Cart</button>
+                </div>
+            </div>
         </div>
-        <div class="product-grid">
-            <div class="product-item">
-                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=700&q=80');"></div>
-                <div class="product-details">
-                    <h4>Classic Black Oversized Hoodie</h4>
-                    <div class="price">₹1,499</div>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80');"></div>
-                <div class="product-details">
-                    <h4>Essential Graphic Tee</h4>
-                    <div class="price">₹799</div>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=700&q=80');"></div>
-                <div class="product-details">
-                    <h4>Vintage Denim Jacket</h4>
-                    <div class="price">₹2,299</div>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80');"></div>
-                <div class="product-details">
-                    <h4>Urban Streetwear Combo</h4>
-                    <div class="price">₹1,999</div>
-                </div>
+    </div>
+
+    <!-- ================= 4. CART & CHECKOUT PAGE VIEW ================= -->
+    <div id="page-cart" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Shopping Cart</h2>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Classic Black Oversized Hoodie (Size: M)</td>
+                        <td>₹1,499</td>
+                        <td>1</td>
+                        <td>₹1,499</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <p><span>Subtotal:</span> <span>₹1,499</span></p>
+                <p><span>Shipping:</span> <span>FREE</span></p>
+                <p class="total"><span>Total Amount:</span> <span>₹1,499</span></p>
+                <button class="btn" style="width: 100%; margin-top: 15px;" onclick="alert('Order placed successfully! Thank you for shopping with HIFUN 3.')">Proceed to Checkout</button>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-grid">
+    <footer>
+        <div class="footer-container">
             <div class="footer-col">
                 <h4>HIFUN 3</h4>
-                <p style="color: #aaa; font-size: 0.9rem; line-height: 1.6;">Wear Your Joy - Bringing exceptional craftsmanship and refined clothing lines directly to modern wardrobes.</p>
+                <p>Wear Your Joy - Bringing exceptional craftsmanship and modern clothing lines directly to your wardrobe.</p>
             </div>
             <div class="footer-col">
-                <h4>Online Shopping</h4>
+                <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#">Men's Wear</a></li>
-                    <li><a href="#">Women's Wear</a></li>
-                    <li><a href="#collections">Collections</a></li>
-                    <li><a href="#arrival">New Arrivals</a></li>
+                    <li><a onclick="switchPage('home')">Home</a></li>
+                    <li><a onclick="switchPage('shop')">Shop Catalog</a></li>
+                    <li><a onclick="switchPage('shop')">Collections</a></li>
+                    <li><a onclick="switchPage('cart')">View Cart</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Customer Policies</h4>
                 <ul>
-                    <li><a href="#">Shipping & Delivery</a></li>
-                    <li><a href="#">Returns & Exchanges</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a>Shipping & Delivery</a></li>
+                    <li><a>Returns & Exchanges</a></li>
+                    <li><a>Terms of Service</a></li>
+                    <li><a>Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Contact Info</h4>
-                <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 10px;">Email: support@hifun3.com</p>
-                <p style="color: #aaa; font-size: 0.9rem;">Mon - Sat: 10:00 AM - 7:00 PM</p>
+                <h4>Get in Touch</h4>
+                <p>Email: support@hifun3.com</p>
+                <p>Mon - Sat: 10:00 AM - 7:00 PM</p>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 HIFUN 3. All Rights Reserved.</p>
-            <p>Designed for Ultimate Style</p>
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- Script for Multi-Page Navigation & Dynamic Views -->
     <script>
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('nav-menu');
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
 
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
         });
 
-        const slides = document.querySelectorAll('.slide');
-        let currentSlide = 0;
+        function switchPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.remove('active-page'));
 
-        function nextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
+            // Show selected page
+            document.getElementById('page-' + pageId).classList.add('active-page');
+
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Close mobile menu if open
+            navLinks.classList.remove('active');
         }
 
-        setInterval(nextSlide, 5000);
+        function openProductDetail(title, price, imgUrl) {
+            document.getElementById('detail-title').innerText = title;
+            document.getElementById('detail-price').innerText = price;
+            document.getElementById('detail-img').style.backgroundImage = `url('${imgUrl}')`;
+            switchPage('detail');
+        }
     </script>
 
 </body>
