@@ -80,32 +80,53 @@
     .nav-right .btn-text { display: none; }
   }
 
-  /* ---------- Simple Coming Soon Banner (Topmost below Header) ---------- */
-  .simple-banner {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 24px 32px;
-    text-align: center;
-    border-bottom: 1px solid var(--line);
-  }
-  .simple-banner-content {
-    max-width: 800px;
-    margin: 0 auto;
+  /* ---------- Big Image Banner (Coming Soon Hero Banner) ---------- */
+  .image-banner {
+    position: relative;
+    height: 480px;
+    background-color: var(--ink);
+    overflow: hidden;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    text-align: center;
   }
-  .simple-banner h3 {
-    font-size: 1.6rem;
-    font-family: 'Anton', sans-serif;
+  .image-banner img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.45;
+  }
+  .image-banner-content {
+    position: relative;
+    z-index: 2;
+    color: var(--paper);
+    max-width: 700px;
+    padding: 0 24px;
+  }
+  .image-banner-content span.badge {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--accent-ink);
+    padding: 6px 16px;
+    font-size: 0.78rem;
+    font-weight: 700;
     letter-spacing: 1px;
-    color: var(--accent);
     text-transform: uppercase;
+    margin-bottom: 16px;
+    border-radius: 4px;
   }
-  .simple-banner p {
-    font-size: 0.95rem;
+  .image-banner-content h2 {
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    margin-bottom: 12px;
+  }
+  .image-banner-content p {
+    font-size: 1.05rem;
     color: #E2DFD5;
+    margin-bottom: 24px;
   }
 
   /* ---------- Hero Section with Image Slider ---------- */
@@ -160,6 +181,7 @@
     .hero { grid-template-columns: 1fr; }
     .hero-img { height: 380px; order: -1; min-height: unset; }
     .hero-copy { max-width: 100%; margin: 0; padding: 40px 24px; }
+    .image-banner { height: 380px; }
   }
 
   /* ---------- Sections Common ---------- */
@@ -319,16 +341,19 @@
     </div>
   </header>
 
-  <!-- Simple Coming Soon Banner (Placed right below Header) -->
-  <div class="simple-banner">
-    <div class="simple-banner-content">
-      <h3>Coming Soon</h3>
+  <!-- Coming Soon Image Banner (Placed right below Header) -->
+  <section class="image-banner" id="top">
+    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80" alt="Coming Soon Banner">
+    <div class="image-banner-content">
+      <span class="badge">Coming Soon</span>
+      <h2 class="display">Store Launching Soon</h2>
       <p>Free shipping on all prepaid orders &nbsp;·&nbsp; Cash on delivery available everywhere</p>
+      <button class="btn btn-accent" id="bannerQuickView">Explore Collection &rarr;</button>
     </div>
-  </div>
+  </section>
 
   <!-- Hero Section with Image Slider -->
-  <section class="hero" id="top" style="padding:0;">
+  <section class="hero" style="padding:0;">
     <div class="hero-copy">
       <h1 class="display">
         <span>Wear</span>
@@ -551,6 +576,9 @@
       document.getElementById('products').scrollIntoView({behavior: 'smooth'});
     });
     document.getElementById('ctaShopBtn').addEventListener('click', () => {
+      document.getElementById('products').scrollIntoView({behavior: 'smooth'});
+    });
+    document.getElementById('bannerQuickView').addEventListener('click', () => {
       document.getElementById('products').scrollIntoView({behavior: 'smooth'});
     });
     document.getElementById('viewAllProd').addEventListener('click', () => {
