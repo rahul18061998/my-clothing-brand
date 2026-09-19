@@ -34,17 +34,6 @@
 
   a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-  /* ---------- Announcement bar ---------- */
-  .announce {
-    background: var(--ink);
-    color: var(--paper);
-    text-align: center;
-    font-size: 0.82rem;
-    padding: 10px 16px;
-    letter-spacing: 0.3px;
-  }
-  .announce b { color: var(--accent); }
-
   /* ---------- Header ---------- */
   header {
     position: sticky; top: 0; z-index: 1000;
@@ -91,10 +80,33 @@
     .nav-right .btn-text { display: none; }
   }
 
-  /* ---------- Hero Section ---------- */
+  /* ---------- Coming Soon Banner (Topmost below Header) ---------- */
+  .soon-banner {
+    background: var(--stone);
+    border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+  }
+  .soon-inner {
+    display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  }
+  .soon-text { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .soon-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--ink); color: var(--paper);
+    padding: 5px 12px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.4px; border-radius: 20px;
+  }
+  .soon-badge::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .soon-inner p { font-size: 0.9rem; color: var(--muted); }
+  .soon-inner p b { color: var(--ink); }
+
+  /* ---------- Hero Section (with Slider) ---------- */
   .hero {
     display: grid; grid-template-columns: 1fr 1fr;
-    min-height: 620px;
+    min-height: 580px;
     background: var(--paper);
     position: relative;
   }
@@ -144,30 +156,6 @@
     .hero-img { height: 380px; order: -1; min-height: unset; }
     .hero-copy { max-width: 100%; margin: 0; padding: 40px 24px; }
   }
-
-  /* ---------- Announcement / Banner ---------- */
-  .soon-banner {
-    background: var(--stone);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 32px 0;
-  }
-  .soon-inner {
-    display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
-  }
-  .soon-text { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-  .soon-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--ink); color: var(--paper);
-    padding: 6px 14px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.4px; border-radius: 20px;
-  }
-  .soon-badge::before {
-    content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
-    animation: pulse 1.5s infinite;
-  }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-  .soon-inner p { font-size: 0.95rem; color: var(--muted); }
-  .soon-inner p b { color: var(--ink); }
 
   /* ---------- Sections Common ---------- */
   section {
@@ -297,9 +285,6 @@
 </head>
 <body>
 
-  <!-- Announcement Bar -->
-  <div class="announce">Free shipping on all prepaid orders &nbsp;·&nbsp; Cash on delivery available <b>everywhere</b></div>
-
   <!-- Header -->
   <header>
     <div class="nav">
@@ -329,7 +314,18 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Coming Soon Banner (Placed at the Very Top right below Header) -->
+  <div class="soon-banner">
+    <div class="wrap soon-inner">
+      <div class="soon-text">
+        <span class="soon-badge">Coming Soon</span>
+        <p>Free shipping on all prepaid orders &nbsp;·&nbsp; Cash on delivery available <b>everywhere</b></p>
+      </div>
+      <button class="btn btn-accent" id="bannerQuickView" style="padding: 8px 18px; font-size: 0.82rem;">Explore Items</button>
+    </div>
+  </div>
+
+  <!-- Hero Section with Image Slider -->
   <section class="hero" id="top" style="padding:0;">
     <div class="hero-copy">
       <h1 class="display">
@@ -340,7 +336,7 @@
       <p>Oversized hoodies, graphic tees and jackets, cut for comfort and built to move with you. Made for the everyday, not the runway.</p>
       <div class="hero-actions">
         <button class="btn btn-accent" id="heroShopBtn">Shop the collection</button>
-        <a class="btn" style="background:transparent;color:var(--ink);border:1px solid var(--line);" href="#categories">Browse categories</a>
+        <button class="btn nav-scroll" data-target="categories" style="background:transparent;color:var(--ink);border:1px solid var(--line);">Browse categories</button>
       </div>
     </div>
     <div class="hero-img" id="heroSlider">
@@ -353,23 +349,12 @@
     </div>
   </section>
 
-  <!-- Coming Soon Banner -->
-  <div class="soon-banner">
-    <div class="wrap soon-inner">
-      <div class="soon-text">
-        <span class="soon-badge">In-Page Store</span>
-        <p>Explore collection items directly inside this experience.</p>
-      </div>
-      <button class="btn btn-accent" id="bannerQuickView">View Collection Items</button>
-    </div>
-  </div>
-
   <!-- Shop by Category Section -->
   <section class="categories" id="categories">
     <div class="wrap">
       <div class="section-head">
         <h2 class="display">Shop by category</h2>
-        <a id="viewAllCat">View all &rarr;</a>
+        <a class="nav-scroll" data-target="products">View all &rarr;</a>
       </div>
       <div class="categories-grid">
         <div class="cat-card product-trigger" data-item="Heavyweight Oversized Hoodie" data-price="₹1,499">
@@ -567,9 +552,6 @@
       document.getElementById('products').scrollIntoView({behavior: 'smooth'});
     });
     document.getElementById('bannerQuickView').addEventListener('click', () => {
-      document.getElementById('products').scrollIntoView({behavior: 'smooth'});
-    });
-    document.getElementById('viewAllCat').addEventListener('click', () => {
       document.getElementById('products').scrollIntoView({behavior: 'smooth'});
     });
     document.getElementById('viewAllProd').addEventListener('click', () => {
