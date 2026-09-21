@@ -352,6 +352,18 @@
   .launch-popup-box h3 { font-size: 1.6rem; font-family: 'Anton', sans-serif; letter-spacing: 0.5px; margin-bottom: 10px; }
   .launch-popup-box p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 26px; }
   .launch-popup-box .btn { width: auto; padding: 12px 30px; }
+
+  /* ---------- Music Toggle Button ---------- */
+  .music-toggle {
+    position: fixed; bottom: 24px; right: 24px; z-index: 3500;
+    width: 50px; height: 50px; border-radius: 50%; border: none;
+    background: var(--ink); color: var(--paper); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25); transition: transform 0.2s, background 0.2s;
+  }
+  .music-toggle:hover { transform: scale(1.08); background: var(--accent); }
+  .music-toggle svg { width: 22px; height: 22px; }
+  .music-toggle.playing { animation: pulseGlow 2s infinite; }
 </style>
   <script type="application/ld+json">
 {
@@ -451,6 +463,15 @@
       <button class="btn btn-accent" id="checkoutBtn">Proceed to Checkout</button>
     </div>
   </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="./theme-song.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-toggle" id="musicToggle" aria-label="Toggle music">
+    <svg id="musicIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+    <svg id="musicIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><line x1="3" y1="3" x2="21" y2="21"/></svg>
+  </button>
 
   <!-- Launching Soon Popup -->
   <div class="launch-popup-overlay" id="launchPopupOverlay">
@@ -730,6 +751,58 @@
         const el = document.getElementById(targetId);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
       });
+    });
+
+    // ---------- Background Music ----------
+    const bgMusic = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIconOn = document.getElementById('musicIconOn');
+    const musicIconOff = document.getElementById('musicIconOff');
+    let userMuted = false;
+
+    function updateMusicIcon(isPlaying) {
+      musicIconOn.style.display = isPlaying ? 'block' : 'none';
+      musicIconOff.style.display = isPlaying ? 'none' : 'block';
+      musicToggle.classList.toggle('playing', isPlaying);
+    }
+
+    function tryPlayMusic() {
+      if (userMuted) return;
+      bgMusic.play().then(() => {
+        updateMusicIcon(true);
+      }).catch(() => {
+        // Autoplay blocked — will retry on first user interaction
+        updateMusicIcon(false);
+      });
+    }
+
+    // Try to autoplay as soon as the page loads
+    window.addEventListener('load', tryPlayMusic);
+
+    // Fallback: if autoplay was blocked, start on the very first click/tap/keypress anywhere
+    function firstInteractionPlay() {
+      if (!userMuted && bgMusic.paused) {
+        tryPlayMusic();
+      }
+      document.removeEventListener('click', firstInteractionPlay);
+      document.removeEventListener('keydown', firstInteractionPlay);
+      document.removeEventListener('touchstart', firstInteractionPlay);
+    }
+    document.addEventListener('click', firstInteractionPlay);
+    document.addEventListener('keydown', firstInteractionPlay);
+    document.addEventListener('touchstart', firstInteractionPlay);
+
+    // Manual mute/unmute button
+    musicToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (bgMusic.paused) {
+        userMuted = false;
+        tryPlayMusic();
+      } else {
+        userMuted = true;
+        bgMusic.pause();
+        updateMusicIcon(false);
+      }
     });
 
     // ---------- Launching Soon Popup ----------
