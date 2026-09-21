@@ -330,6 +330,28 @@
   @media (max-width: 780px) {
     .footer-grid { grid-template-columns: 1fr 1fr; row-gap: 36px; }
   }
+
+  /* ---------- Launching Soon Popup ---------- */
+  .launch-popup-overlay {
+    position: fixed; inset: 0; background: rgba(17,17,16,0.65); backdrop-filter: blur(6px);
+    z-index: 4000; display: flex; align-items: center; justify-content: center;
+    padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .launch-popup-overlay.active { opacity: 1; pointer-events: auto; }
+  .launch-popup-box {
+    background: var(--paper); width: 100%; max-width: 400px; padding: 40px 32px; border-radius: 10px;
+    text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+    transform: translateY(20px) scale(0.96); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .launch-popup-overlay.active .launch-popup-box { transform: translateY(0) scale(1); }
+  .launch-popup-badge {
+    display: inline-block; background: var(--accent); color: var(--accent-ink);
+    padding: 6px 16px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    border-radius: 4px; margin-bottom: 18px; animation: pulseGlow 2s infinite;
+  }
+  .launch-popup-box h3 { font-size: 1.6rem; font-family: 'Anton', sans-serif; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .launch-popup-box p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 26px; }
+  .launch-popup-box .btn { width: auto; padding: 12px 30px; }
 </style>
   <script type="application/ld+json">
 {
@@ -430,6 +452,16 @@
     </div>
   </div>
 
+  <!-- Launching Soon Popup -->
+  <div class="launch-popup-overlay" id="launchPopupOverlay">
+    <div class="launch-popup-box animate-up">
+      <span class="launch-popup-badge">Coming Soon</span>
+      <h3 class="display">Launching Soon</h3>
+      <p>Hum abhi taiyari kar rahe hain! Ye feature bahut jald live ho jayega. Thodi der aur intezaar kijiye.</p>
+      <button class="btn btn-accent" id="launchPopupClose">Okay, Got It</button>
+    </div>
+  </div>
+
   <!-- Coming Soon Image Banner -->
   <section class="image-banner" id="top">
     <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80" alt="Coming Soon Banner">
@@ -452,7 +484,7 @@
       <p>Oversized hoodies, graphic tees and jackets, cut for comfort and built to move with you. Made for the everyday, not the runway.</p>
       <div class="hero-actions">
         <button class="btn btn-accent" id="heroShopBtn" style="width:auto;">Shop the collection</button>
-        <button class="btn nav-scroll" data-target="categories" style="width:auto; background:transparent; color:var(--ink); border:1px solid var(--line);">Browse categories</button>
+        <button class="btn" id="browseCatBtn" style="width:auto; background:transparent; color:var(--ink); border:1px solid var(--line);">Browse categories</button>
       </div>
     </div>
     <div class="hero-img" id="heroSlider">
@@ -519,7 +551,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2 class="display">Shop by category</h2>
-        <a class="nav-scroll" data-target="products">View all &rarr;</a>
+        <a id="viewAllCat">View all &rarr;</a>
       </div>
       <div class="categories-grid">
         <div class="cat-card product-trigger" data-item="Heavyweight Oversized Hoodie" data-price="₹1,499">
@@ -626,10 +658,10 @@
         <div>
           <h4>Shop</h4>
           <ul>
-            <li><a class="nav-scroll" data-target="products">All products</a></li>
-            <li><a class="nav-scroll" data-target="categories">Hoodies</a></li>
-            <li><a class="nav-scroll" data-target="categories">Tees</a></li>
-            <li><a class="nav-scroll" data-target="categories">Jackets</a></li>
+            <li><a class="footer-trigger">All products</a></li>
+            <li><a class="footer-trigger">Hoodies</a></li>
+            <li><a class="footer-trigger">Tees</a></li>
+            <li><a class="footer-trigger">Jackets</a></li>
           </ul>
         </div>
         <div>
@@ -668,7 +700,7 @@
     menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
     navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-    // Search Modal Functionality
+    // Search Modal Functionality (header only — untouched)
     const searchOpenBtn = document.getElementById('searchOpenBtn');
     const searchCloseBtn = document.getElementById('searchCloseBtn');
     const searchOverlay = document.getElementById('searchOverlay');
@@ -683,59 +715,59 @@
       if(e.target === searchOverlay) searchOverlay.classList.remove('active');
     });
 
-    // Cart Drawer Functionality (Right Side)
+    // Cart Drawer open/close (header icon opens it — untouched)
     const cartOpenBtn = document.getElementById('cartOpenBtn');
     const cartCloseBtn = document.getElementById('cartCloseBtn');
     const cartDrawer = document.getElementById('cartDrawer');
-    const checkoutBtn = document.getElementById('checkoutBtn');
 
     cartOpenBtn.addEventListener('click', () => cartDrawer.classList.add('active'));
     cartCloseBtn.addEventListener('click', () => cartDrawer.classList.remove('active'));
-    checkoutBtn.addEventListener('click', () => {
-      alert('Aapka order process secure tarike se initialized ho gaya hai!');
-      cartDrawer.classList.remove('active');
-    });
 
-    // Scroll Triggers & Buttons
-    document.getElementById('heroShopBtn').addEventListener('click', () => {
-      document.getElementById('products').scrollIntoView({behavior: 'smooth'});
-    });
-    document.getElementById('ctaShopBtn').addEventListener('click', () => {
-      document.getElementById('products').scrollIntoView({behavior: 'smooth'});
-    });
-    document.getElementById('bannerQuickView').addEventListener('click', () => {
-      document.getElementById('products').scrollIntoView({behavior: 'smooth'});
-    });
-
-    document.querySelectorAll('.product-trigger').forEach(item => {
-      item.addEventListener('click', () => {
-        const name = item.getAttribute('data-item');
-        const price = item.getAttribute('data-price');
-        alert(name + ' (' + price + ') selected! Aap cart icon par click karke details dekh sakte hain.');
-      });
-    });
-
-    document.querySelectorAll('.policy-trigger').forEach(item => {
-      item.addEventListener('click', () => {
-        alert(item.getAttribute('data-title') + ': 7-day hassle free return and fast shipping.');
-      });
-    });
-
-    document.querySelectorAll('.social-trigger').forEach(item => {
-      item.addEventListener('click', () => {
-        alert('Official ' + item.getAttribute('data-social') + ' link update kiya ja raha hai.');
-      });
-    });
-
-    document.querySelectorAll('.nav-scroll').forEach(link => {
+    // Header nav links — smooth scroll (untouched)
+    document.querySelectorAll('header .nav-scroll').forEach(link => {
       link.addEventListener('click', () => {
         const targetId = link.getAttribute('data-target');
         const el = document.getElementById(targetId);
-        if(el) el.scrollIntoView({behavior: 'smooth'});
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
       });
     });
 
-    // Hero Image Slider
+    // ---------- Launching Soon Popup ----------
+    const launchPopupOverlay = document.getElementById('launchPopupOverlay');
+    const launchPopupClose = document.getElementById('launchPopupClose');
+
+    function showLaunchPopup(e) {
+      if (e) e.preventDefault();
+      launchPopupOverlay.classList.add('active');
+    }
+    function hideLaunchPopup() {
+      launchPopupOverlay.classList.remove('active');
+    }
+    launchPopupClose.addEventListener('click', hideLaunchPopup);
+    launchPopupOverlay.addEventListener('click', (e) => {
+      if (e.target === launchPopupOverlay) hideLaunchPopup();
+    });
+
+    // Every other button/link outside the header now opens the popup
+    const popupTriggerSelectors = [
+      '#bannerQuickView',
+      '#heroShopBtn',
+      '#browseCatBtn',
+      '#checkoutBtn',
+      '#ctaShopBtn',
+      '#viewAllCat',
+      '#viewAllProd',
+      '.product-trigger',
+      '.policy-trigger',
+      '.social-trigger',
+      '.footer-trigger',
+      'footer .nav-scroll'
+    ];
+    document.querySelectorAll(popupTriggerSelectors.join(', ')).forEach(el => {
+      el.addEventListener('click', showLaunchPopup);
+    });
+
+    // Hero Image Slider (untouched)
     (function(){
       const root = document.getElementById('heroSlider');
       if(!root) return;
