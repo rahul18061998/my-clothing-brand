@@ -1,0 +1,12 @@
+{
+  "background_color": "#623d3b",
+  "description": "HIFUN 3 — contemporary streetwear. Oversized hoodies, graphic tees and jackets built for everyday comfort.",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "hifun3",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "HI3",
+  "start_url": "/",
+  "theme_color": "#8b6f6d"
+}
