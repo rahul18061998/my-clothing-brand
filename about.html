@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — HIFUN 3</title>
+<meta name="description" content="The story behind HIFUN 3 — why we started, our mission, and how three friends turned one fun evening into a brand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #3E2A1E;
+    --paper: #FBF3E7;
+    --stone: #EFE0C7;
+    --line: #D9C2A0;
+    --muted: #8B6F47;
+    --accent: #C1440E;
+    --accent-ink: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      repeating-linear-gradient(180deg, rgba(139,111,71,0.05) 0px, rgba(139,111,71,0.05) 1px, transparent 1px, transparent 42px),
+      repeating-linear-gradient(90deg, rgba(139,111,71,0.035) 0px, rgba(139,111,71,0.035) 1px, transparent 1px, transparent 220px);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  .display { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.5px; line-height: 0.95; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px; }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(251, 243, 231, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    max-width: 1240px; margin: 0 auto; padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo-link { display: flex; align-items: center; cursor: pointer; transition: transform 0.2s; }
+  .logo-link:hover { transform: scale(1.02); }
+  .logo-link svg { height: 40px; width: auto; }
+
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    font-size: 0.92rem; font-weight: 500; color: var(--ink); opacity: 0.75;
+    transition: opacity .2s, color .2s; cursor: pointer; position: relative;
+  }
+  .nav-links a.active { opacity: 1; color: var(--accent); }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+    background: var(--accent); transition: width 0.3s ease;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--accent); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--ink); margin: 5px 0; transition: 0.3s; }
+
+  @media (max-width: 940px) {
+    .nav-links {
+      position: absolute; top: 100%; left: 0; width: 100%;
+      background: var(--paper); border-bottom: 1px solid var(--line);
+      flex-direction: column; gap: 0; max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-links.open { max-height: 340px; }
+    .nav-links li { width: 100%; }
+    .nav-links a { display: block; padding: 16px 32px; border-top: 1px solid var(--line); opacity: 1; }
+    .menu-toggle { display: block; }
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--ink); color: var(--paper);
+    padding: 13px 24px; font-size: 0.88rem; font-weight: 600;
+    border: none; cursor: pointer; white-space: nowrap;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.2s; text-align: center;
+    border-radius: 2px;
+  }
+  .btn:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(193, 68, 14, 0.3); }
+  .btn-accent { background: var(--accent); color: var(--accent-ink); }
+  .btn-accent:hover { background: var(--ink); box-shadow: 0 6px 20px rgba(62, 42, 30, 0.3); }
+  .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .btn-outline:hover { background: var(--stone); color: var(--ink); box-shadow: none; }
+
+  /* ---------- Page Banner ---------- */
+  .page-banner {
+    position: relative; height: 320px; background-color: var(--ink); overflow: hidden;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+  }
+  .page-banner img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.38;
+  }
+  .page-banner-content { position: relative; z-index: 2; color: var(--paper); max-width: 700px; padding: 0 24px; }
+  .page-banner-content span.badge {
+    display: inline-block; background: var(--accent); color: var(--accent-ink);
+    padding: 6px 16px; font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; border-radius: 4px;
+  }
+  .page-banner-content h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin-bottom: 12px; }
+  .page-banner-content p { font-size: 1.05rem; color: #E8D4B8; }
+
+  @media (max-width: 880px) { .page-banner { height: 280px; } }
+
+  /* ---------- Story Content ---------- */
+  .about-section { padding: 80px 0; }
+  .story-block { margin-bottom: 56px; }
+  .story-block:last-child { margin-bottom: 0; }
+  .story-block .kicker {
+    display: inline-block; color: var(--accent); font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .story-block h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin-bottom: 20px; }
+  .story-block p { color: var(--muted); line-height: 1.85; font-size: 1.05rem; margin-bottom: 16px; }
+  .story-block p:last-child { margin-bottom: 0; }
+  .story-block p strong { color: var(--ink); }
+
+  .pullquote {
+    border-left: 3px solid var(--accent); padding: 18px 26px; margin: 30px 0;
+    background: var(--stone); border-radius: 0 6px 6px 0;
+  }
+  .pullquote p { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: none;
+    letter-spacing: 0.2px; font-size: clamp(1.15rem, 2vw, 1.4rem); color: var(--ink);
+    line-height: 1.4; margin: 0; }
+
+  .divider { height: 1px; background: var(--line); margin: 56px 0; }
+
+  .about-cta {
+    background: var(--ink); color: var(--paper); border-radius: 10px; padding: 50px 40px;
+    text-align: center; margin-top: 70px;
+  }
+  .about-cta h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 12px; }
+  .about-cta p { color: #E8D4B8; margin-bottom: 26px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .about-cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .about-cta .btn { width: auto; }
+  .about-cta .btn-outline { border-color: rgba(251,243,231,0.3); color: var(--paper); }
+  .about-cta .btn-outline:hover { background: rgba(251,243,231,0.1); }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--paper); padding: 70px 0 30px; border-top: 1px solid var(--line); }
+  .footer-wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 50px; border-bottom: 1px solid var(--line); }
+  .footer-grid h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 20px; letter-spacing: 0.5px; }
+  .footer-grid ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-grid ul a, .footer-grid p { font-size: 0.9rem; color: var(--muted); cursor: pointer; transition: color 0.2s; }
+  .footer-grid ul a:hover { color: var(--ink); }
+  .footer-logo svg { height: 36px; width: auto; margin-bottom: 12px; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; font-size: 0.82rem; color: var(--muted); flex-wrap: wrap; gap: 12px; }
+  .social-row { display: flex; gap: 12px; }
+  .social-row a { width: 38px; height: 38px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
+  .social-row a:hover { border-color: var(--ink); background: var(--stone); transform: translateY(-2px); }
+  .social-row svg { width: 16px; height: 16px; stroke: var(--ink); }
+
+  @media (max-width: 780px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; row-gap: 36px; }
+    .about-cta { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav">
+      <a class="logo-link" href="./index.html">
+        <svg viewBox="0 0 220 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 3L46 14.5V36.5L26 48L6 36.5V14.5L26 3Z" stroke="#D4AF37" stroke-width="3.5" fill="#3E2A1E"/>
+          <path d="M16 17V34M36 17V34M16 25.5H36" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+          <path d="M30 17H40V25.5H35M35 25.5H40V34H30" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="56" y="37" font-family="'Anton', sans-serif" font-size="34" letter-spacing="2" fill="#3E2A1E">HIFUN</text>
+        </svg>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="./index.html#categories">Shop</a></li>
+        <li><a href="./index.html#products">New In</a></li>
+        <li><a href="./about.html" class="active">About</a></li>
+        <li><a href="./founders.html">Founders</a></li>
+        <li><a href="./faq.html">FAQ</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section class="page-banner">
+    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80" alt="HIFUN 3 workshop">
+    <div class="page-banner-content animate-up">
+      <span class="badge">Our Story</span>
+      <h1 class="display">Why We Started HIFUN 3</h1>
+      <p>Quality that everyone can actually afford — that's the whole story.</p>
+    </div>
+  </section>
+
+  <!-- About Content -->
+  <section class="about-section">
+    <div class="wrap">
+
+      <div class="story-block">
+        <span class="kicker">The Problem</span>
+        <h2 class="display">Everyone was selling clothes. No one was selling quality.</h2>
+        <p>Go to any market and you'll find no shortage of clothing brands. What you won't find easily is clothing that's actually <strong>built to last</strong>. Most brands were doing one of two things — pushing cheap fabric that fell apart in a few washes, or offering genuinely good quality at a price only a handful of people could ever afford.</p>
+        <p>In between those two extremes was a massive gap, and nobody was stepping up to fill it. The people who needed good, durable, honest clothing the most — the middle class and lower-middle class of this country — were the ones being left out entirely, priced out of quality they deserved just as much as anyone else.</p>
+      </div>
+
+      <div class="pullquote">
+        <p>"Why should quality be a luxury? We decided it shouldn't be."</p>
+      </div>
+
+      <div class="story-block">
+        <span class="kicker">Our Mission</span>
+        <h2 class="display">Premium quality. Prices everyone can afford.</h2>
+        <p>That gap is exactly where HIFUN 3 was born. We didn't want to build just another clothing brand — we wanted to build the brand that ordinary, hard-working people actually deserved: heavyweight fabric, real craftsmanship, honest fits, without the luxury price tag stapled on top.</p>
+        <p>While other brands raise their prices the moment they gain a little popularity, that's not the road we're taking. Our promise is simple and it isn't changing — <strong>high quality, kept within reach of every wallet</strong>, so that anyone, regardless of their budget, can wear something they're genuinely proud of.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="story-block">
+        <span class="kicker">The Name</span>
+        <h2 class="display">How three friends became HIFUN 3</h2>
+        <p>The story behind our name is as real as it gets — no boardroom, no branding agency, just three friends and one ordinary evening. We met up the way we always did, greeted each other with a casual <strong>"Hi bro!"</strong>, and what followed was hours of non-stop laughing, talking nonsense and just having fun together.</p>
+        <p>Somewhere in between the jokes, one of us blurted out — <strong>"Hi... fun... HIFUN!"</strong> — and for a second everyone went quiet before the whole group burst out laughing again. But that careless, joy-filled moment stuck. That's when it clicked — this could actually be something.</p>
+        <p>We added the <strong>"3"</strong> for a reason close to our hearts — it stands for the three of us. Three friends who turned one fun evening into a business plan, one inside joke into a brand name, and one shared laugh into something we now build every single day. HIFUN 3 isn't just a name on a tag — it's the story of three friends who decided to build something real, together.</p>
+      </div>
+
+      <div class="about-cta">
+        <h2 class="display">Know Us. Wear Us.</h2>
+        <p>Meet the three friends behind the brand, or jump straight into the collection.</p>
+        <div class="about-cta-actions">
+          <a href="./founders.html" class="btn btn-accent">Meet the Founders</a>
+          <a href="./index.html#products" class="btn btn-outline">Explore Collection</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-wrap">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <svg viewBox="0 0 220 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M26 3L46 14.5V36.5L26 48L6 36.5V14.5L26 3Z" stroke="#D4AF37" stroke-width="3.5" fill="#3E2A1E"/>
+              <path d="M16 17V34M36 17V34M16 25.5H36" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+              <path d="M30 17H40V25.5H35M35 25.5H40V34H30" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="56" y="37" font-family="'Anton', sans-serif" font-size="34" letter-spacing="2" fill="#3E2A1E">HIFUN</text>
+            </svg>
+          </div>
+          <p>Contemporary streetwear, made for everyday comfort. Wear your joy.</p>
+        </div>
+        <div>
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="./index.html#products">All products</a></li>
+            <li><a href="./index.html#products">Hoodies</a></li>
+            <li><a href="./index.html#products">Tees</a></li>
+            <li><a href="./index.html#products">Jackets</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="./about.html">About us</a></li>
+            <li><a href="./founders.html">Founders</a></li>
+            <li><a href="./faq.html">FAQ</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get in touch</h4>
+          <ul>
+            <li><p>support@hifun3.com</p></li>
+            <li><p>Mon–Sat, 10 AM – 7 PM</p></li>
+          </ul>
+          <div class="social-row" style="margin-top:16px;">
+            <a aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+            <a aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 21l1.4-4.2A9 9 0 1 1 8 20.6z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 HIFUN 3. All rights reserved.</p>
+        <p>Made in India</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  </script>
+</body>
+</html>
