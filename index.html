@@ -9,12 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #111110;
-    --paper: #FFFFFF;
-    --stone: #F4F3ED;
-    --line: #E2DFD5;
-    --muted: #6B6A64;
-    --accent: #FF4B1F;
+    --ink: #3E2A1E;
+    --paper: #FBF3E7;
+    --stone: #EFE0C7;
+    --line: #D9C2A0;
+    --muted: #8B6F47;
+    --accent: #C1440E;
     --accent-ink: #FFFFFF;
   }
 
@@ -23,7 +23,10 @@
   body {
     font-family: 'Inter', sans-serif;
     color: var(--ink);
-    background: var(--paper);
+    background-color: var(--paper);
+    background-image:
+      repeating-linear-gradient(180deg, rgba(139,111,71,0.05) 0px, rgba(139,111,71,0.05) 1px, transparent 1px, transparent 42px),
+      repeating-linear-gradient(90deg, rgba(139,111,71,0.035) 0px, rgba(139,111,71,0.035) 1px, transparent 1px, transparent 220px);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
@@ -55,7 +58,7 @@
   /* ---------- Header ---------- */
   header {
     position: sticky; top: 0; z-index: 1000;
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(251, 243, 231, 0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
     transition: all 0.3s ease;
@@ -182,7 +185,7 @@
     animation: pulseGlow 2s infinite;
   }
   .image-banner-content h2 { font-size: clamp(2.8rem, 5vw, 4.2rem); margin-bottom: 12px; }
-  .image-banner-content p { font-size: 1.05rem; color: #E2DFD5; margin-bottom: 24px; }
+  .image-banner-content p { font-size: 1.05rem; color: #E8D4B8; margin-bottom: 24px; }
 
   /* ---------- Hero Section with Image Slider ---------- */
   .hero {
@@ -347,7 +350,7 @@
   .cta-banner { background: var(--ink); color: var(--paper); padding: 100px 0; text-align: left; position: relative; overflow: hidden; }
   .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; position: relative; z-index: 2; }
   .cta-banner h2 { font-size: clamp(2.4vw, 5vw, 3.8rem); max-width: 650px; }
-  .cta-banner p { color: #A8A69F; margin-top: 14px; max-width: 420px; font-size: 1.05rem; }
+  .cta-banner p { color: #C9AD87; margin-top: 14px; max-width: 420px; font-size: 1.05rem; }
 
   /* ---------- Footer ---------- */
   footer { background: var(--paper); padding: 70px 0 30px; border-top: 1px solid var(--line); }
@@ -432,10 +435,10 @@
     <div class="nav">
       <a class="logo-link nav-scroll" data-target="top">
         <svg viewBox="0 0 220 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M26 3L46 14.5V36.5L26 48L6 36.5V14.5L26 3Z" stroke="#D4AF37" stroke-width="3.5" fill="#111110"/>
+          <path d="M26 3L46 14.5V36.5L26 48L6 36.5V14.5L26 3Z" stroke="#D4AF37" stroke-width="3.5" fill="#3E2A1E"/>
           <path d="M16 17V34M36 17V34M16 25.5H36" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
           <path d="M30 17H40V25.5H35M35 25.5H40V34H30" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="56" y="37" font-family="'Anton', sans-serif" font-size="34" letter-spacing="2" fill="#111110">HIFUN</text>
+          <text x="56" y="37" font-family="'Anton', sans-serif" font-size="34" letter-spacing="2" fill="#3E2A1E">HIFUN</text>
         </svg>
       </a>
 
@@ -749,10 +752,10 @@
         <div>
           <div class="footer-logo">
             <svg viewBox="0 0 220 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M26 3L46 14.5V36.5L26 48L6 36.5V14.5L26 3Z" stroke="#D4AF37" stroke-width="3.5" fill="#111110"/>
+              <path d="M26 3L46 14.5V36.5L26 48L6 36.5V14.5L26 3Z" stroke="#D4AF37" stroke-width="3.5" fill="#3E2A1E"/>
               <path d="M16 17V34M36 17V34M16 25.5H36" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
               <path d="M30 17H40V25.5H35M35 25.5H40V34H30" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              <text x="56" y="37" font-family="'Anton', sans-serif" font-size="34" letter-spacing="2" fill="#111110">HIFUN</text>
+              <text x="56" y="37" font-family="'Anton', sans-serif" font-size="34" letter-spacing="2" fill="#3E2A1E">HIFUN</text>
             </svg>
           </div>
           <p>Contemporary streetwear, made for everyday comfort. Wear your joy.</p>
