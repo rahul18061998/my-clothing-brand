@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — HIFUN 3</title>
+<meta name="description" content="Frequently asked questions about HIFUN 3 — shipping, COD, returns, sizing and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #3E2A1E;
+    --paper: #FBF3E7;
+    --stone: #EFE0C7;
+    --line: #D9C2A0;
+    --muted: #8B6F47;
+    --accent: #C1440E;
+    --accent-ink: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      repeating-linear-gradient(180deg, rgba(139,111,71,0.05) 0px, rgba(139,111,71,0.05) 1px, transparent 1px, transparent 42px),
+      repeating-linear-gradient(90deg, rgba(139,111,71,0.035) 0px, rgba(139,111,71,0.035) 1px, transparent 1px, transparent 220px);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  .display { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.5px; line-height: 0.95; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 32px; }
+
+  a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(251, 243, 231, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    max-width: 1240px; margin: 0 auto; padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo-link { display: flex; align-items: center; cursor: pointer; transition: transform 0.2s; }
+  .logo-link:hover { transform: scale(1.02); }
+  .logo-link svg { height: 40px; width: auto; }
+
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    font-size: 0.92rem; font-weight: 500; color: var(--ink); opacity: 0.75;
+    transition: opacity .2s, color .2s; cursor: pointer; position: relative;
+  }
+  .nav-links a.active { opacity: 1; color: var(--accent); }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+    background: var(--accent); transition: width 0.3s ease;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--accent); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--ink); margin: 5px 0; transition: 0.3s; }
+
+  @media (max-width: 940px) {
+    .nav-links {
+      position: absolute; top: 100%; left: 0; width: 100%;
+      background: var(--paper); border-bottom: 1px solid var(--line);
+      flex-direction: column; gap: 0; max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-links.open { max-height: 340px; }
+    .nav-links li { width: 100%; }
+    .nav-links a { display: block; padding: 16px 32px; border-top: 1px solid var(--line); opacity: 1; }
+    .menu-toggle { display: block; }
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--ink); color: var(--paper);
+    padding: 13px 24px; font-size: 0.88rem; font-weight: 600;
+    border: none; cursor: pointer; white-space: nowrap;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.2s; text-align: center;
+    border-radius: 2px;
+  }
+  .btn:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(193, 68, 14, 0.3); }
+  .btn-accent { background: var(--accent); color: var(--accent-ink); }
+  .btn-accent:hover { background: var(--ink); box-shadow: 0 6px 20px rgba(62, 42, 30, 0.3); }
+
+  /* ---------- Page Banner ---------- */
+  .page-banner {
+    position: relative; height: 280px; background-color: var(--ink); overflow: hidden;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+  }
+  .page-banner img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.35;
+  }
+  .page-banner-content { position: relative; z-index: 2; color: var(--paper); max-width: 700px; padding: 0 24px; }
+  .page-banner-content span.badge {
+    display: inline-block; background: var(--accent); color: var(--accent-ink);
+    padding: 6px 16px; font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; border-radius: 4px;
+  }
+  .page-banner-content h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); margin-bottom: 10px; }
+  .page-banner-content p { font-size: 1.02rem; color: #E8D4B8; }
+
+  @media (max-width: 880px) { .page-banner { height: 240px; } }
+
+  /* ---------- FAQ Accordion ---------- */
+  .faq-section { padding: 70px 0 90px; }
+  .faq-group { margin-bottom: 44px; }
+  .faq-group:last-child { margin-bottom: 0; }
+  .faq-group-title {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px;
+  }
+  details.faq-item {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+    margin-bottom: 12px; overflow: hidden; transition: border-color 0.2s;
+  }
+  details.faq-item[open] { border-color: var(--accent); }
+  details.faq-item summary {
+    list-style: none; cursor: pointer; padding: 20px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    font-weight: 600; font-size: 1rem;
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary .qmark {
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--stone);
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 700;
+    color: var(--accent); transition: transform 0.25s ease, background 0.2s;
+  }
+  details.faq-item[open] summary .qmark { transform: rotate(45deg); background: var(--accent); color: var(--accent-ink); }
+  .faq-answer { padding: 0 24px 22px; color: var(--muted); line-height: 1.75; font-size: 0.96rem; }
+  .faq-answer a { color: var(--accent); font-weight: 600; }
+
+  .faq-cta {
+    background: var(--stone); border: 1px solid var(--line); border-radius: 8px;
+    padding: 34px 30px; text-align: center; margin-top: 50px;
+  }
+  .faq-cta h3 { font-family: 'Anton', sans-serif; letter-spacing: 0.5px; font-size: 1.3rem; margin-bottom: 8px; }
+  .faq-cta p { color: var(--muted); margin-bottom: 20px; font-size: 0.95rem; }
+  .faq-cta .btn { width: auto; }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--paper); padding: 70px 0 30px; border-top: 1px solid var(--line); }
+  .footer-wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 50px; border-bottom: 1px solid var(--line); }
+  .footer-grid h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 20px; letter-spacing: 0.5px; }
+  .footer-grid ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-grid ul a, .footer-grid p { font-size: 0.9rem; color: var(--muted); cursor: pointer; transition: color 0.2s; }
+  .footer-grid ul a:hover { color: var(--ink); }
+  .footer-logo svg { height: 36px; width: auto; margin-bottom: 12px; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; font-size: 0.82rem; color: var(--muted); flex-wrap: wrap; gap: 12px; }
+  .social-row { display: flex; gap: 12px; }
+  .social-row a { width: 38px; height: 38px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
+  .social-row a:hover { border-color: var(--ink); background: var(--stone); transform: translateY(-2px); }
+  .social-row svg { width: 16px; height: 16px; stroke: var(--ink); }
+
+  @media (max-width: 780px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; row-gap: 36px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav">
+      <a class="logo-link" href="./index.html">
+        <svg viewBox="0 0 220 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 3L46 14.5V36.5L26 48L6 36.5V14.5L26 3Z" stroke="#D4AF37" stroke-width="3.5" fill="#3E2A1E"/>
+          <path d="M16 17V34M36 17V34M16 25.5H36" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+          <path d="M30 17H40V25.5H35M35 25.5H40V34H30" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="56" y="37" font-family="'Anton', sans-serif" font-size="34" letter-spacing="2" fill="#3E2A1E">HIFUN</text>
+        </svg>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="./index.html#categories">Shop</a></li>
+        <li><a href="./index.html#products">New In</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li><a href="./founders.html">Founders</a></li>
+        <li><a href="./faq.html" class="active">FAQ</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section class="page-banner">
+    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1600&q=80" alt="HIFUN 3 FAQ">
+    <div class="page-banner-content animate-up">
+      <span class="badge">Need Help?</span>
+      <h1 class="display">Frequently Asked Questions</h1>
+      <p>Everything you need to know before your first order.</p>
+    </div>
+  </section>
+
+  <!-- FAQ Content -->
+  <section class="faq-section">
+    <div class="wrap">
+
+      <div class="faq-group">
+        <div class="faq-group-title">Ordering & Store</div>
+
+        <details class="faq-item" open>
+          <summary>Is the HIFUN 3 store live yet?<span class="qmark">+</span></summary>
+          <div class="faq-answer">We're putting the finishing touches on our very first drop. The products you see on the site are a preview of what's coming — full checkout will be live very soon. Follow along or reach out on our <a href="./contact.html">Contact page</a> and we'll let you know the moment we launch.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What kind of quality can I expect?<span class="qmark">+</span></summary>
+          <div class="faq-answer">Heavyweight cotton fabric, reinforced stitching and fits that are actually cut for comfort — not corner-cut to save cost. Quality is the entire reason HIFUN 3 exists, so we don't compromise on it.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What payment methods will be available?<span class="qmark">+</span></summary>
+          <div class="faq-answer">Once the store goes live, you'll be able to pay via UPI, cards, net banking, and Cash on Delivery (COD) — whichever works best for you.</div>
+        </details>
+      </div>
+
+      <div class="faq-group">
+        <div class="faq-group-title">Shipping & Delivery</div>
+
+        <details class="faq-item">
+          <summary>Do you offer Cash on Delivery (COD)?<span class="qmark">+</span></summary>
+          <div class="faq-answer">Yes. COD will be available across India alongside prepaid options once the store is fully live.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Is shipping free?<span class="qmark">+</span></summary>
+          <div class="faq-answer">Yes, shipping is free on all prepaid orders across India. A small nominal fee may apply on COD orders.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Do you ship pan-India?<span class="qmark">+</span></summary>
+          <div class="faq-answer">Yes, once live, HIFUN 3 will ship to every serviceable pin code across India.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How can I track my order?<span class="qmark">+</span></summary>
+          <div class="faq-answer">After launch, every order will come with a tracking link shared over SMS, email, and WhatsApp so you always know where your package is.</div>
+        </details>
+      </div>
+
+      <div class="faq-group">
+        <div class="faq-group-title">Sizing, Returns & Exchange</div>
+
+        <details class="faq-item">
+          <summary>How do I know which size to pick?<span class="qmark">+</span></summary>
+          <div class="faq-answer">A detailed size chart will be available on every product page. If you're still unsure, message us directly on <a href="./contact.html">WhatsApp</a> and we'll help you pick the right fit.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What's your return or exchange policy?<span class="qmark">+</span></summary>
+          <div class="faq-answer">If an item doesn't fit right or arrives damaged, you'll be able to request a return or exchange within a set window of delivery, as long as the tags are intact and the item is unworn. Full policy details will be published before launch.</div>
+        </details>
+      </div>
+
+      <div class="faq-group">
+        <div class="faq-group-title">About the Brand</div>
+
+        <details class="faq-item">
+          <summary>Where is HIFUN 3 based?<span class="qmark">+</span></summary>
+          <div class="faq-answer">HIFUN 3 is a homegrown Indian brand, built and run by three friends. You can read the full story on our <a href="./about.html">About Us</a> page.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do I contact HIFUN 3 directly?<span class="qmark">+</span></summary>
+          <div class="faq-answer">Head over to our <a href="./contact.html">Contact page</a> — you can reach any of the three founders directly on Instagram, Facebook, or WhatsApp.</div>
+        </details>
+      </div>
+
+      <div class="faq-cta">
+        <h3 class="display">Still have a question?</h3>
+        <p>Message us directly and we'll get back to you as soon as we can.</p>
+        <a href="./contact.html" class="btn btn-accent">Contact Us</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-wrap">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <svg viewBox="0 0 220 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M26 3L46 14.5V36.5L26 48L6 36.5V14.5L26 3Z" stroke="#D4AF37" stroke-width="3.5" fill="#3E2A1E"/>
+              <path d="M16 17V34M36 17V34M16 25.5H36" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+              <path d="M30 17H40V25.5H35M35 25.5H40V34H30" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="56" y="37" font-family="'Anton', sans-serif" font-size="34" letter-spacing="2" fill="#3E2A1E">HIFUN</text>
+            </svg>
+          </div>
+          <p>Contemporary streetwear, made for everyday comfort. Wear your joy.</p>
+        </div>
+        <div>
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="./index.html#products">All products</a></li>
+            <li><a href="./index.html#products">Hoodies</a></li>
+            <li><a href="./index.html#products">Tees</a></li>
+            <li><a href="./index.html#products">Jackets</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="./about.html">About us</a></li>
+            <li><a href="./founders.html">Founders</a></li>
+            <li><a href="./faq.html">FAQ</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get in touch</h4>
+          <ul>
+            <li><p>support@hifun3.com</p></li>
+            <li><p>Mon–Sat, 10 AM – 7 PM</p></li>
+          </ul>
+          <div class="social-row" style="margin-top:16px;">
+            <a aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+            <a aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 21l1.4-4.2A9 9 0 1 1 8 20.6z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 HIFUN 3. All rights reserved.</p>
+        <p>Made in India</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+    // Only one FAQ item open at a time within its group
+    document.querySelectorAll('details.faq-item').forEach(item => {
+      item.addEventListener('toggle', () => {
+        if (item.open) {
+          const group = item.closest('.faq-group');
+          group.querySelectorAll('details.faq-item').forEach(other => {
+            if (other !== item) other.open = false;
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
