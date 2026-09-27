@@ -58,7 +58,7 @@
   .logo-link:hover { transform: scale(1.02); }
   .logo-link svg { height: 40px; width: auto; }
 
-  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
   .nav-links a {
     font-size: 0.92rem; font-weight: 500; color: var(--ink); opacity: 0.75;
     transition: opacity .2s, color .2s; cursor: pointer; position: relative;
@@ -74,13 +74,13 @@
   .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
   .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--ink); margin: 5px 0; transition: 0.3s; }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     .nav-links {
       position: absolute; top: 100%; left: 0; width: 100%;
       background: var(--paper); border-bottom: 1px solid var(--line);
       flex-direction: column; gap: 0; max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .nav-links.open { max-height: 280px; }
+    .nav-links.open { max-height: 340px; }
     .nav-links li { width: 100%; }
     .nav-links a { display: block; padding: 16px 32px; border-top: 1px solid var(--line); opacity: 1; }
     .menu-toggle { display: block; }
@@ -178,8 +178,9 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="./index.html#categories">Shop</a></li>
         <li><a href="./index.html#products">New In</a></li>
-        <li><a href="./index.html#story">About</a></li>
+        <li><a href="./about.html">About</a></li>
         <li><a href="./founders.html" class="active">Founders</a></li>
+        <li><a href="./faq.html">FAQ</a></li>
         <li><a href="./contact.html">Contact</a></li>
       </ul>
 
@@ -282,8 +283,9 @@
         <div>
           <h4>Company</h4>
           <ul>
+            <li><a href="./about.html">About us</a></li>
             <li><a href="./founders.html">Founders</a></li>
-            <li><a href="./index.html#story">About us</a></li>
+            <li><a href="./faq.html">FAQ</a></li>
             <li><a href="./contact.html">Contact</a></li>
           </ul>
         </div>
