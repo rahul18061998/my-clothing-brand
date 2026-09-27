@@ -307,6 +307,42 @@
     .prod-row { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   }
 
+  /* ---------- Brand Showcase Slider ---------- */
+  .showcase { background: var(--stone); overflow: hidden; }
+  .showcase-slider {
+    position: relative; height: 560px; max-width: 1240px; margin: 0 auto;
+    border-radius: 8px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.14);
+  }
+  .show-slide {
+    position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease, transform 8s linear;
+    transform: scale(1); cursor: pointer;
+  }
+  .show-slide.active { opacity: 1; transform: scale(1.04); }
+  .show-slide img { width: 100%; height: 100%; object-fit: cover; }
+  .show-caption {
+    position: absolute; left: 0; bottom: 0; width: 100%; padding: 34px 40px;
+    background: linear-gradient(to top, rgba(17,17,16,0.82) 0%, transparent 65%);
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  }
+  .show-caption .show-tag {
+    display: inline-block; background: var(--accent); color: var(--accent-ink);
+    padding: 5px 14px; font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    border-radius: 4px; margin-bottom: 10px;
+  }
+  .show-caption h3 { color: var(--paper); font-size: clamp(1.4rem, 2.6vw, 2rem); max-width: 480px; }
+  .show-caption .show-price {
+    background: var(--paper); color: var(--ink); padding: 10px 20px; border-radius: 4px;
+    font-weight: 700; font-size: 1.05rem; white-space: nowrap;
+  }
+
+  @media (max-width: 880px) {
+    .showcase-slider { height: 420px; border-radius: 0; }
+    .show-caption { padding: 24px; }
+  }
+  @media (max-width: 560px) {
+    .showcase-slider { height: 360px; }
+  }
+
   /* ---------- CTA Banner ---------- */
   .cta-banner { background: var(--ink); color: var(--paper); padding: 100px 0; text-align: left; position: relative; overflow: hidden; }
   .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; position: relative; z-index: 2; }
@@ -674,6 +710,76 @@
     </div>
   </section>
 
+  <!-- Brand Showcase Slider -->
+  <section class="showcase" id="showcase">
+    <div class="wrap" style="margin-bottom: 36px;">
+      <div class="section-head" style="margin-bottom: 0;">
+        <h2 class="display">Inside the Drop</h2>
+        <p style="color: var(--muted); max-width: 480px;">Heritage prints, hand-finished details, heavyweight fabric — a closer look at what makes HIFUN 3.</p>
+      </div>
+    </div>
+    <div class="showcase-slider" id="showcaseSlider">
+      <div class="show-slide active product-trigger" data-item="Modern Nostalgia Cultural Fusion Tee" data-price="₹699">
+        <img src="./modern-nostalgia-tee.jpeg" alt="Modern Nostalgia Cultural Fusion Tee">
+        <div class="show-caption">
+          <div><span class="show-tag">New Drop</span><h3 class="display">Modern Nostalgia Cultural Fusion Tee</h3></div>
+          <span class="show-price">₹699</span>
+        </div>
+      </div>
+      <div class="show-slide product-trigger" data-item="Urban Heritage Guild Oversized Tee" data-price="₹679">
+        <img src="./urban-heritage-tee.jpeg" alt="Urban Heritage Guild Oversized Tee">
+        <div class="show-caption">
+          <div><span class="show-tag">Bestseller</span><h3 class="display">Urban Heritage Guild Oversized Tee</h3></div>
+          <span class="show-price">₹679</span>
+        </div>
+      </div>
+      <div class="show-slide product-trigger" data-item="Antique Heritage Oversized Tee" data-price="₹649">
+        <img src="./antique-heritage-tee.jpeg" alt="Antique Heritage Oversized Tee">
+        <div class="show-caption">
+          <div><span class="show-tag">Heritage Series</span><h3 class="display">Antique Heritage Oversized Tee</h3></div>
+          <span class="show-price">₹649</span>
+        </div>
+      </div>
+      <div class="show-slide product-trigger" data-item="Embroidered Craft Detail" data-price="">
+        <img src="./embroidery-detail.jpeg" alt="Hand embroidered heritage crest detail">
+        <div class="show-caption">
+          <div><span class="show-tag">Craftsmanship</span><h3 class="display">Hand-Detailed Embroidery</h3></div>
+        </div>
+      </div>
+      <div class="show-slide product-trigger" data-item="Wear Your Vibe Black Polo" data-price="₹599">
+        <img src="./wear-your-vibe-black-polo.jpeg" alt="Wear Your Vibe Black Polo">
+        <div class="show-caption">
+          <div><span class="show-tag">Everyday Essential</span><h3 class="display">Wear Your Vibe Black Polo</h3></div>
+          <span class="show-price">₹599</span>
+        </div>
+      </div>
+      <div class="show-slide product-trigger" data-item="Sleeve Patch Detail" data-price="">
+        <img src="./sleeve-patch-detail.jpeg" alt="HIFUN 3 sleeve patch detail">
+        <div class="show-caption">
+          <div><span class="show-tag">Signature Detail</span><h3 class="display">Woven Sleeve Patch</h3></div>
+        </div>
+      </div>
+      <div class="show-slide product-trigger" data-item="HIFUN Logo White Polo" data-price="₹579">
+        <img src="./hifun-logo-white-polo.jpeg" alt="HIFUN Logo White Polo">
+        <div class="show-caption">
+          <div><span class="show-tag">Wardrobe Staple</span><h3 class="display">HIFUN Logo White Polo</h3></div>
+          <span class="show-price">₹579</span>
+        </div>
+      </div>
+      <div class="show-slide product-trigger" data-item="Wear Your Vibe White Polo" data-price="₹549">
+        <img src="./wear-your-vibe-white-polo.jpeg" alt="Wear Your Vibe White Polo">
+        <div class="show-caption">
+          <div><span class="show-tag">Fan Favourite</span><h3 class="display">Wear Your Vibe White Polo</h3></div>
+          <span class="show-price">₹549</span>
+        </div>
+      </div>
+
+      <button class="slider-arrow prev" id="showPrev" aria-label="Previous">&#8249;</button>
+      <button class="slider-arrow next" id="showNext" aria-label="Next">&#8250;</button>
+      <div class="slider-dots" id="showDots"></div>
+    </div>
+  </section>
+
   <!-- CTA Banner -->
   <section class="cta-banner">
     <div class="wrap cta-inner">
@@ -897,6 +1003,45 @@
 
       prevBtn.addEventListener('click', () => { prev(); resetTimer(); });
       nextBtn.addEventListener('click', () => { next(); resetTimer(); });
+      root.addEventListener('mouseenter', () => clearInterval(timer));
+      root.addEventListener('mouseleave', startTimer);
+
+      startTimer();
+    })();
+
+    // Brand Showcase Slider (Inside the Drop)
+    (function(){
+      const root = document.getElementById('showcaseSlider');
+      if(!root) return;
+      const slides = root.querySelectorAll('.show-slide');
+      const dotsWrap = document.getElementById('showDots');
+      const prevBtn = document.getElementById('showPrev');
+      const nextBtn = document.getElementById('showNext');
+      let current = 0;
+      let timer;
+
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', (e) => { e.stopPropagation(); goTo(i); resetTimer(); });
+        dotsWrap.appendChild(dot);
+      });
+      const dots = dotsWrap.querySelectorAll('.dot');
+
+      function goTo(index){
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+      function next(){ goTo(current + 1); }
+      function prev(){ goTo(current - 1); }
+      function startTimer(){ timer = setInterval(next, 4200); }
+      function resetTimer(){ clearInterval(timer); startTimer(); }
+
+      prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); resetTimer(); });
+      nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); resetTimer(); });
       root.addEventListener('mouseenter', () => clearInterval(timer));
       root.addEventListener('mouseleave', startTimer);
 
